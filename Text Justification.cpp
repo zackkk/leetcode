@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // being fucked for 3 hours
+    // many corner cases
     // point: record words length in each line, then we can assign spaces easily
     vector<string> fullJustify(vector<string> &words, int L) {
         vector<string> ret;
@@ -11,17 +11,15 @@ public:
             int curLineWordsLen = 0;     
             // previous length + length needed < L
             while((i < words.size() && curLineWordsLen == 0) ||   // first word
-                  (i < words.size() && curLineWordsLen + (curLineWords.size() - 1) + (words[i].size() + 1) <= L)) {  // check i here
+                  (i < words.size() && curLineWordsLen + (curLineWords.size() - 1) + (words[i].size() + 1) <= L)) {  // check if can add
                 curLineWords.push_back(words[i]);
                 curLineWordsLen += words[i].size();
                 i++;
             }
             int space = L - curLineWordsLen;
 			/*
-			    case1: last line with multiple words;
-			    case2: last line with one word;
-			    case3: non-last line with multiple words;
-			    case4: non-last line with one word.
+			    case1:     last line with one word / multiple words;
+			    case2: non-last line with one word / multiple words;
 			 */
 			
             // last line, not distribute evenly
