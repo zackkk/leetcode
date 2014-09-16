@@ -19,7 +19,8 @@ public:
             nodes.push_back(NULL);
             return nodes;
         }
-        
+         
+        // treat each number as the root, construct the tree recursively
         for(int mid = low; mid <= high; mid++){
             vector<TreeNode *> leftNodes = generate(low, mid-1);
             vector<TreeNode *> rightNodes = generate(mid+1, high);
@@ -35,8 +36,3 @@ public:
         return nodes;
     }
 };
-
-
-
-
-
