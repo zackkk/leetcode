@@ -23,17 +23,18 @@ public:
                 num = true;
             else if(s[i] == '.'){
                 if(dot) return false; // can't repeat
-                if(exp) return false;
+                if(exp) return false; // exp can't appear before
                 dot = true;
             }
             else if(s[i] == 'e'){
                 if(exp) return false; // can't repeat
-                if(!num) return false;
+                if(!num) return false; // num must appear before
                 exp = true;
-                num = false;
+                num = false; // num must appear later
             }
-            else if(s[i] == '+' || s[i] == '-'){
-                if(s[i-1] != 'E' && s[i-1] != 'e') return false;
+            else if(s[i] == '+' || s[i] == '-'){ // '+'/'-' must be followed with 'E'/'e'
+                if(s[i-1] != 'E' && s[i-1] != 'e') 
+                    return false;
             }
             else 
                 return false;
