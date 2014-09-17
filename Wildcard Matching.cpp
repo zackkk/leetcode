@@ -13,7 +13,7 @@ public:
                 continue;
             }
             
-            // "*" appears, match zero times
+            // "*" appears, match zero times, "******..." equals "*"
             if(*p == '*'){
                 star_p = p; 
                 star_p_s = s;
@@ -33,7 +33,7 @@ public:
             return false;
         } 
         
-        while(*p == '*') p++;
-        return !*p;
+        while(*p == '*') p++; // "******..." equals "*"
+        return !*p; // check if p has reached to end
     }
 };
