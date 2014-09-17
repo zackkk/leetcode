@@ -1,17 +1,39 @@
 class Solution {
 public:
-    // '*' is different from Regular Expression Matching
-    // failed in large data set... other solutions are confusing...
+    // two "star" pointers for going back to match
     bool isMatch(const char *s, const char *p) {
-        if(*p == '*'){
-            while(*p == '*') p++; // continous '*'
-            if(*p == '\0') return true;
-            while(*s != '\0' && !isMatch(s, p))
+        const char *star_p = NULL; // store the position of the last "*"
+        const char *star_p_s = s; // store the mapping position of the last "*" in s
+        
+        while(*s){
+            // normal case
+            if(*p == '?' || *p == *s){
+                p++;
                 s++;
-            return *s == '\0' ? false : true; // since p has not reached end
-        }
-        else if(*s == '\0' && *p == '\0') return true;
-        else if(*p == *s || *p == '?') return isMatch(++s, ++p);
-        else return false;
+                continue;
+            }
+            
+            // "*" appears, match zero times
+            if(*p == '*'){
+                star_p = p; 
+                star_p_s = s;
+                p++;
+                continue;
+            }
+            
+            // can't move on, go back to use "*", to match one/more times
+            if(star_p){
+                p = star_p + 1;
+                star_p_s++;
+                s = star_p_s;
+                continue;
+            }
+            
+            // no matching 
+            return false;
+        } 
+        
+        while(*p == '*') p++;
+        return !*p;
     }
 };
