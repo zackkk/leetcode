@@ -8,14 +8,11 @@ public:
         int hLen = strlen(haystack);
         int nLen = strlen(needle);
         if(hLen < nLen) return NULL;
-        for(int i = 0; i + nLen - 1 < hLen; i++){
-            char *p = &haystack[i];
-            int j = 0;
-            while(j < nLen){
-                if(*p != needle[j])
-                    break;
-                p++;
-                j++;
+        int i,j;
+        for(i = 0; i + nLen - 1 < hLen; i++){
+            for(j = 0; j < nLen; j++){
+                if(haystack[i+j] != needle[j])
+                break;
             }
             if(j == nLen)
                 return &haystack[i];
