@@ -9,35 +9,37 @@
  */
 class Solution {
 public:
-    // use two stacks instead of queue
+    // use two stacks instead of queue, magic!
     vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
         vector<vector<int>> ret;
-        if(NULL == root) return ret;
+        if(root == NULL){ 
+            return ret;
+        }
         
-        stack<TreeNode *> curLevel;
-        curLevel.push(root);
+        stack<TreeNode *> cur;
+        cur.push(root);
         bool normalOrder = true;
         
-        while(!curLevel.empty()){
+        while(!cur.empty()){
             vector<int> vec;
-            stack<TreeNode *> nextLevel;
-            while(!curLevel.empty()){
-                TreeNode *tn = curLevel.top();
-                curLevel.pop();
+            stack<TreeNode *> next;
+            while(!cur.empty()){
+                TreeNode *tn = cur.top();
+                cur.pop();
                 vec.push_back(tn->val);
                 
                 if(normalOrder){
-                    if(tn->left) nextLevel.push(tn->left);
-                    if(tn->right) nextLevel.push(tn->right);
+                    if(tn->left) next.push(tn->left);
+                    if(tn->right) next.push(tn->right);
                 }
                 else{
-                    if(tn->right) nextLevel.push(tn->right);
-                    if(tn->left) nextLevel.push(tn->left);
+                    if(tn->right) next.push(tn->right);
+                    if(tn->left) next.push(tn->left);
                 }
             }
             ret.push_back(vec);
             normalOrder = !normalOrder;
-            curLevel = nextLevel;
+            cur = next;
         }
         
         return ret;

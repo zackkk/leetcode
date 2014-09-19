@@ -9,8 +9,8 @@
  */
 class Solution {
 public:
+    // bfs
     vector<vector<int> > levelOrderBottom(TreeNode *root) {
-        // bfs
         vector<vector<int>> ret;
         if(NULL == root) return ret;
         queue<TreeNode *> q;
@@ -29,10 +29,8 @@ public:
             ret.push_back(vec);
             q = q_next;
         }
-        vector<vector<int>> retRes;
-        for(int i = ret.size()-1; i >= 0; i--){
-            retRes.push_back(ret[i]);
-        }
-        return retRes;
+    
+        reverse(ret.begin(), ret.end());
+        return ret;
     }
 };

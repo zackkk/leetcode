@@ -9,6 +9,7 @@
  */
 class Solution {
 public:
+    // bfs
     vector<vector<int> > levelOrder(TreeNode *root) {
         vector<vector<int>> ret;
         if(NULL == root) return ret;

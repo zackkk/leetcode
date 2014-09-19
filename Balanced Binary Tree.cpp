@@ -14,13 +14,15 @@ public:
         return getDepth(root) != -1;
     }
     int getDepth(TreeNode *root){
-        if(NULL == root)
+        if(NULL == root){
             return 0;
-        int leftDepth = getDepth(root->left);
-        int rightDepth = getDepth(root->right);
-        if(leftDepth == -1 || rightDepth == -1 || abs(leftDepth - rightDepth) > 1)
+        }
+        
+        int left = getDepth(root->left);
+        int right = getDepth(root->right);
+        if(left == -1 || right == -1 || abs(left - right) > 1)
             return -1;
         else
-            return max(leftDepth, rightDepth) + 1;
+            return max(left, right) + 1;
     }
 };
