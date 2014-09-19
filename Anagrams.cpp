@@ -10,12 +10,11 @@ public:
             myMap[key].push_back(strs[i]);
         }
         
-        // map: iterator->first, iterator->second
+        // map: iterator->first, iterator->second; auto: map<string, vector<string>>::iterator
         vector<string> ret;
-        for(map<string, vector<string>>::iterator it = myMap.begin(); it != myMap.end(); ++it){
-            vector<string> vec = it->second;
-            if(vec.size() > 1){
-                ret.insert(ret.end(), vec.begin(), vec.end());
+        for(auto it = myMap.begin(); it != myMap.end(); ++it){
+            if(it->second.size() > 1){
+                ret.insert(ret.end(), it->second.begin(), it->second.end());
             }
         }
         return ret;

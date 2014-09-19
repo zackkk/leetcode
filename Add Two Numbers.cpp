@@ -10,17 +10,17 @@ class Solution {
 public:
     // straight forward implementation
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        ListNode *preHead = new ListNode(-1);
-        ListNode *prev = preHead;
+        ListNode *dummy = new ListNode(0);
+        ListNode *prev = dummy;
         
         int carry = 0;
-        while(NULL != l1 || NULL != l2){
+        while(l1 != NULL || l2 != NULL){
             int tmpSum = carry;
-            if(NULL != l1){
+            if(l1 != NULL){
                 tmpSum += l1->val;
                 l1 = l1->next;
             }
-            if(NULL != l2){
+            if(l2 != NULL){
                 tmpSum += l2->val;
                 l2 = l2->next;
             }
@@ -29,10 +29,10 @@ public:
             prev->next = cur;
             prev = cur;
         }
-        if(0 != carry){
+        if(carry != 0){
             ListNode *cur = new ListNode(carry);
             prev->next = cur;
         }
-        return preHead->next;
+        return dummy->next;
     }
 };
