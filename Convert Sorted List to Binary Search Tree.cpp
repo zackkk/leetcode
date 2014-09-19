@@ -18,29 +18,33 @@
 class Solution {
 ListNode *listPtr = NULL; // key: it keeps moving to the next element in the linked list.
 public:
-    // review: convert sorted array to BST: preorder traverse
+    // review: convert sorted array to BST: preorder traverse, it has direct access to elements
     // inorder traverse + move linked list
     TreeNode *sortedListToBST(ListNode *head) {
-        if(NULL == head) return NULL;
-        ListNode *cur = head;
-        int count = 0;
-        while(NULL != cur){
-            cur = cur->next;
-            count++;
+        if(head == NULL){ 
+            return NULL;
         }
+        int count = countListEle(head);
         listPtr = head;
-        return helper(0, count-1);
+        return helper(0, count - 1);
     }
-    TreeNode *helper(int l, int r){
-        if(l > r) return NULL;
-        int m = (l+r)/2;
+    TreeNode *helper(int start, int end){
+        if(start > end){ 
+            return NULL;
+        }
+        int mid = (start + end) / 2;
         
-        TreeNode *left = helper(l, m-1);
-        int rootVal = listPtr->val;
+        TreeNode *left = helper(start, mid - 1);
+        int value = listPtr->val;
         listPtr = listPtr->next;
-        TreeNode *root = new TreeNode(rootVal);
+        TreeNode *root = new TreeNode(value);
         root->left = left;
-        root->right = helper(m+1, r);
+        root->right = helper(mid + 1, end);
         return root;
+    }
+    int countListEle(ListNode *node){
+        int i = 0;
+        while(node != NULL) { node = node->next; i++; }
+        return i;
     }
 };

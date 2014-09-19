@@ -9,23 +9,22 @@
  */
 class Solution {
 public:
-    // improve: use index
+    // recursion
     TreeNode *sortedArrayToBST(vector<int> &num) {
-        int len = num.size(); // vector has no length() member func
-        if(len == 0)
+        if(num.size() == 0){
             return NULL;
-        TreeNode *root = new TreeNode(num[len/2]);
-        
-        vector<int> leftVec; 
-        for(int i = 0; i < len/2; i++)
-            leftVec.push_back(num[i]);
-            
-        vector<int> rightVec;
-        for(int i = len/2+1; i < len; i++)
-            rightVec.push_back(num[i]);
-            
-        root->left = sortedArrayToBST(leftVec);
-        root->right = sortedArrayToBST(rightVec);
+        }
+        return helper(num, 0, num.size()-1);
+    }
+    TreeNode *helper(vector<int> &num, int start, int end){
+        if(start > end){
+            return NULL;
+        }
+        int mid = (start + end) / 2;
+    
+        TreeNode *root = new TreeNode(num[mid]);
+        root->left = helper(num, start, mid - 1);
+        root->right = helper(num, mid + 1, end);
         return root;
     }
 };

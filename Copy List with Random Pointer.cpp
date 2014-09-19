@@ -12,16 +12,17 @@ public:
     RandomListNode *copyRandomList(RandomListNode *head) {
         map<RandomListNode *, RandomListNode *> mapOldToNew;
         
-        // create all new nodes
+        // copy nodes
         RandomListNode *cur = head;
-        while(NULL != cur){
+        while(cur != NULL){
             RandomListNode *newNode = new RandomListNode(cur->label); 
             mapOldToNew[cur] = newNode;
             cur = cur->next;
         }
         
+        // copy connections
         cur = head;
-        while(NULL != cur){
+        while(cur != NULL){
             mapOldToNew[cur]->next = mapOldToNew[cur->next];
             mapOldToNew[cur]->random = mapOldToNew[cur->random];
             cur = cur->next;

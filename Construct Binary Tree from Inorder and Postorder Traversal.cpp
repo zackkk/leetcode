@@ -9,18 +9,23 @@
  */
 class Solution {
 public:
+    // list all elements of inorder & postorder; use index to traverse
+    // construct procedure: root->left->right
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-        if(inorder.size() == 0 || postorder.size() == 0 || inorder.size() != postorder.size())
+        if(inorder.size() == 0 || postorder.size() == 0 || inorder.size() != postorder.size()){
             return NULL;
+        }
         // <val, pos>
         map<int, int> myMap;
-        for(int i = 0; i < inorder.size(); i++)
+        for(int i = 0; i < inorder.size(); i++){
             myMap[inorder[i]] = i;
+        }
         return helper(inorder, 0, inorder.size()-1, postorder, 0, postorder.size()-1, myMap);
     }
     TreeNode *helper(vector<int> &inorder, int in_l, int in_h, vector<int> &postorder, int post_l, int post_h, map<int, int> &myMap){
-        if(in_l > in_h || post_l > post_h)
+        if(in_l > in_h || post_l > post_h){
             return NULL;
+        }
         
         int rootVal = postorder[post_h];
         int in_rootPos = myMap[rootVal];
