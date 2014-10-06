@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // dfs
+    // dfs, elimiate duplicates
     vector<vector<int> > combinationSum2(vector<int> &num, int target) {
         sort(num.begin(), num.end());
         vector<vector<int> > ret;

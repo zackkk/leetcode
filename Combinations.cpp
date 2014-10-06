@@ -8,6 +8,7 @@ public:
         dfs(ret, vec, n, k, 1);
         return ret;
     }
+    
     void dfs(vector<vector<int>> &ret, vector<int> &vec, int n, int k, int cur){
         if(k == vec.size()){
             ret.push_back(vec);

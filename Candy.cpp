@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // abstract the question as a "line" model: 3 line types: increasing, decreasing, horizontal.
+    // abstract the question as a "line" model: 3 line types: increasing, decreasing and horizontal.
     int candy(vector<int> &ratings) {
         int sz = ratings.size();
         vector<int> candies (sz, 1);

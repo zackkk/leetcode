@@ -8,7 +8,7 @@
  */
 class Solution {
 public:
-    // recursion ---> failed unknown
+    // deep copy, map old to new
     RandomListNode *copyRandomList(RandomListNode *head) {
         map<RandomListNode *, RandomListNode *> mapOldToNew;
         

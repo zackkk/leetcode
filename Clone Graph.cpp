@@ -9,12 +9,10 @@
 class Solution {
 public:
     // non-recursion & bfs: complicated
-    // map: old to new
+    // deep copy, dfs, map old to new
     // clone node -> clone connections
     UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
-        if(NULL == node){ 
-            return NULL;
-        }
+        if(node == NULL) return NULL;
         map<UndirectedGraphNode *, UndirectedGraphNode *> mapOldToNew; // labels are unique
         return dfs(node, mapOldToNew);
     }

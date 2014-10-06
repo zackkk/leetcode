@@ -9,30 +9,31 @@
  */
 class Solution {
 public:
-    // list all elements of inorder & postorder; use index to traverse
-    // construct procedure: root->left->right
-    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-        if(inorder.size() == 0 || postorder.size() == 0 || inorder.size() != postorder.size()){
+    // tree traverse + index control
+    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
+        if(preorder.size() == 0 || inorder.size() == 0 || preorder.size() != inorder.size()){
             return NULL;
         }
+        
         // <val, pos>
         map<int, int> myMap;
         for(int i = 0; i < inorder.size(); i++){
             myMap[inorder[i]] = i;
         }
-        return helper(inorder, 0, inorder.size()-1, postorder, 0, postorder.size()-1, myMap);
+        return helper(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1, myMap);
     }
-    TreeNode *helper(vector<int> &inorder, int in_l, int in_h, vector<int> &postorder, int post_l, int post_h, map<int, int> &myMap){
-        if(in_l > in_h || post_l > post_h){
+    
+    TreeNode *helper(vector<int> &preorder, int pre_l, int pre_h, vector<int> &inorder, int in_l, int in_h, map<int, int> &myMap){
+        if(pre_l > pre_h || in_l > in_h){
             return NULL;
         }
         
-        int rootVal = postorder[post_h];
-        int in_rootPos = myMap[rootVal];
+        int rootVal = preorder[pre_l];
         TreeNode *root = new TreeNode(rootVal);
+        int in_rootPos = myMap[rootVal];
         
-        root->left = helper(inorder, in_l, in_rootPos-1, postorder, post_l, post_l+(in_rootPos-1-in_l), myMap);
-        root->right = helper(inorder, in_rootPos+1, in_h, postorder, post_l+(in_rootPos-1-in_l)+1, post_h-1, myMap);
+        root->left = helper(preorder, pre_l+1, pre_l+1+(in_rootPos-1-in_l), inorder, in_l, in_rootPos-1, myMap);
+        root->right = helper(preorder, pre_l+1+(in_rootPos-1-in_l)+1, pre_h, inorder, in_rootPos+1, in_h, myMap);
         return root;
     }
 };
