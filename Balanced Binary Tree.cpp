@@ -9,14 +9,12 @@
  */
 class Solution {
 public:
-    // post-order traverse & the usage of -1
+    // post-order traverse & the usage of -1, use return value to avoid duplicate calculation. traverse once only
     bool isBalanced(TreeNode *root) {
         return getDepth(root) != -1;
     }
     int getDepth(TreeNode *root){
-        if(NULL == root){
-            return 0;
-        }
+        if(root == NULL) return 0;
         
         int left = getDepth(root->left);
         int right = getDepth(root->right);

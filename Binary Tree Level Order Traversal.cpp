@@ -12,7 +12,7 @@ public:
     // bfs
     vector<vector<int> > levelOrder(TreeNode *root) {
         vector<vector<int>> ret;
-        if(NULL == root) return ret;
+        if(root == NULL) return ret;
         
         queue<TreeNode *> q;
         q.push(root);

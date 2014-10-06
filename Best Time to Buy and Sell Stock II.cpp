@@ -2,12 +2,12 @@ class Solution {
 public:
     // buy a stock if its price will be increasing
     int maxProfit(vector<int> &prices) {
-        int ret = 0;
+        int maxprofit = 0;
         for(int i = 1; i < prices.size(); i++){
             if(prices[i] > prices[i-1]){
-                ret += (prices[i] - prices[i-1]);  
+                maxprofit += (prices[i] - prices[i-1]);  
             }
         }
-        return ret;
+        return maxprofit;
     }
 };

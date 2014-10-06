@@ -14,21 +14,21 @@ public:
         left[0] = 0; // no trade no money
         int low = prices[0];
         for(int i = 1; i < len; i++){
-            low = min(low, prices[i]);
             left[i] = max(left[i-1], prices[i] - low); // global max vs local max
+            low = min(low, prices[i]);
         }
         
         // dp from right to left
         right[len-1] = 0;
         int high = prices[len-1];
         for(int i = len-2; i >= 0; i--){
-            high = max(high, prices[i]);
             right[i] = max(right[i+1], high - prices[i]); // global max vs local max
+            high = max(high, prices[i]);
         }
         
-        int ret = 0;
+        int maxprofit = 0;
         for(int i = 0; i < len; i++)
-            ret = max(ret, left[i]+right[i]);
-        return ret;
+            maxprofit = max(maxprofit, left[i] + right[i]);
+        return maxprofit;
     }
 };

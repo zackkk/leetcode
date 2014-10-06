@@ -6,12 +6,12 @@ public:
             return 0;
         }
         
-        int ret = 0;
+        int maxprofit = 0;
         int low = prices[0];
         for(int i = 1; i < prices.size(); i++){
-            ret = max(ret, prices[i] - low);
+            maxprofit = max(maxprofit, prices[i] - low);
             low = min(low, prices[i]);
         }
-        return ret;
+        return maxprofit;
     }
 };

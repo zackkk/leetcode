@@ -18,7 +18,7 @@ public:
         while(!q.empty()){
             queue<TreeNode *> q_next;
             vector<int> vec;
-            // save current level and get next level
+            // save current level and get the next level
             while(!q.empty()){
                 TreeNode *tn = q.front();
                 q.pop();
@@ -30,7 +30,7 @@ public:
             q = q_next;
         }
     
-        reverse(ret.begin(), ret.end());
+        reverse(ret.begin(), ret.end()); // use STL
         return ret;
     }
 };

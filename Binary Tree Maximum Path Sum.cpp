@@ -8,12 +8,12 @@
  * };
  */
 class Solution {
-int maxSum = INT_MIN;
+int maxsum = INT_MIN;
 public:
     // post-order traverse, negative values
     int maxPathSum(TreeNode *root) {
         helper(root);
-        return maxSum;
+        return maxsum;
     }
     int helper(TreeNode *root){
         if(NULL == root){ 
@@ -24,8 +24,8 @@ public:
         int right = helper(root->right);
         int ret = max(root->val, max(left, right) + root->val); // return max "single path" sum
         
-        maxSum = max(maxSum, ret);
-        maxSum = max(maxSum, left + right + root->val); // start at left and end at right
+        maxsum = max(maxsum, ret);
+        maxsum = max(maxsum, left + right + root->val); // start at left and end at right
         return ret;
     }
 };
