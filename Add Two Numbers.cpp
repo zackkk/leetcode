@@ -15,17 +15,17 @@ public:
         
         int carry = 0;
         while(l1 != NULL || l2 != NULL){
-            int tmpSum = carry;
+            int sum = carry;
             if(l1 != NULL){
-                tmpSum += l1->val;
+                sum += l1->val;
                 l1 = l1->next;
             }
             if(l2 != NULL){
-                tmpSum += l2->val;
+                sum += l2->val;
                 l2 = l2->next;
             }
-            carry = tmpSum / 10;
-            ListNode *cur = new ListNode(tmpSum % 10);
+            carry = sum / 10;
+            ListNode *cur = new ListNode(sum % 10);
             prev->next = cur;
             prev = cur;
         }

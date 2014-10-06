@@ -1,16 +1,12 @@
 class Solution {
 public:
-    // left, right pointers trick
+    // n-sum, sort, duplicates?
     int threeSumClosest(vector<int> &num, int target) {
         sort(num.begin(), num.end());
         
-        if(num.size() == 0)
+        if(num.size() < 3)
             return 0;
-        if(num.size() == 1)
-            return num[0];
-        if(num.size() == 2)
-            return num[0] + num[1];
-        
+    
         int sum = 0;
         int minDiff = INT_MAX;
         for(int i = 0; i <= num.size() - 3; i++){
