@@ -1,5 +1,8 @@
 class Solution {
 public:
+    // 00, 01
+    // 00, 01,, 11, 10
+    // 00, 01,  11, 10 ,, 110, 111, 101, 100
     vector<int> grayCode(int n) {
         vector<int> ret;
         ret.push_back(0);

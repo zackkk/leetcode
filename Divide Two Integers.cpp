@@ -5,7 +5,7 @@ public:
     //                = 8 + (8+8) + ...
     // solution3:  64 = 8(2^3) + 16(2^4) + ...
     int divide(int dividend, int divisor) {
-        long long y = dividend; // may overflow
+        long long y = dividend; // avoid overflow
         long long x = divisor;
         y = abs(y);
         x = abs(x);

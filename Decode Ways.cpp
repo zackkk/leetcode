@@ -1,11 +1,9 @@
 class Solution {
 public:
     // dp ---> case1: one char, case2: two chars
-    // climb stairs !!!!!!!!!!!!!
+    // climb stairs 
     int numDecodings(string s) {
-        if(s.size() == 0){ 
-            return 0;
-        }
+        if(s.size() == 0) return 0;
         
         vector<int> dp (s.size()+1, 0);
         dp[0] = 1; // "10" has one mapping

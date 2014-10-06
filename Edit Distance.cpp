@@ -1,7 +1,6 @@
 class Solution {
 public:
-    // 2d dp
-    // dp[i,j]: min distance from word1[1..i] to word2[1..j]
+    // 2d dp, dp[i,j]: min distance from word1[1..i] to word2[1..j]
     int minDistance(string word1, string word2) {
         int m = word1.size();
         int n = word2.size();

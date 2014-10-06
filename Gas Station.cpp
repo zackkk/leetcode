@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // trick: record gap, then check if it can fill later
+    // trick: store "gap", then check if it can fill later
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
         int len = gas.size();
         vector<int> left;

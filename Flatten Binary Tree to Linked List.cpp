@@ -12,12 +12,14 @@ TreeNode *prev = new TreeNode(-1);
 public:
     // pre-order & prev pointer
     void flatten(TreeNode *root) {
-        if(NULL == root) return;
+        if(root == NULL) return;
+        
         prev->right = root;
         prev->left = NULL;
         prev = root;
-        TreeNode *rightTree = root->right;
+        
         // connect by prev 
+        TreeNode *rightTree = root->right;
         flatten(root->left);
         flatten(rightTree);
     }

@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // dfs, cc150
     vector<string> generateParenthesis(int n) {
         vector<string> ret;
         helper(n, 0, 0, "", ret);
@@ -11,8 +12,7 @@ public:
             return;
         }
         if(left < n)
-            // left++ and ++left didn't work
-            helper(n, left+1, right, str+"(", ret);
+            helper(n, left+1, right, str+"(", ret);   // left++ and ++left didn't work
         if(right < left)
             helper(n, left, right+1, str+")", ret);
     }
