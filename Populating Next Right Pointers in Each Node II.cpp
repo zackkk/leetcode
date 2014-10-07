@@ -10,7 +10,7 @@ class Solution {
 public:
     // bfs
     void connect(TreeLinkNode *root) {
-        if(NULL == root) return;
+        if(root == NULL) return;
         queue<TreeLinkNode *> q;
         q.push(root);
         while(!q.empty()){
@@ -19,7 +19,7 @@ public:
             while(!q.empty()){
                 TreeLinkNode *cur = q.front();
                 q.pop();
-                if(NULL == prev)
+                if(prev == NULL)
                     prev = cur;
                 else{
                     prev->next = cur;

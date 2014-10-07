@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // reverse all digits, not just half.
+    // similar to Reverse Integer
     bool isPalindrome(int x) {
         if(x < 0) return false;
         return x == reverse(x);

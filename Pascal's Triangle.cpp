@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // straight forward solution
+    // straight-forward implementation
     vector<vector<int> > generate(int numRows) {
         vector<vector<int>> ret;
         if(numRows == 0) return ret;

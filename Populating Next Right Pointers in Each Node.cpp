@@ -8,15 +8,15 @@
  */
 class Solution {
 public:
+    // assign connections for the next level
     void connect(TreeLinkNode *root) {
-        if(NULL == root || NULL == root->left)
+        if(root == NULL || root->left == NULL)
             return;
         
         TreeLinkNode *traverse = root;
-        while(NULL != traverse){
-            traverse->left->next = traverse->right;
-            if(NULL != traverse->next)
-                traverse->right->next = traverse->next->left;
+        while(traverse != NULL){
+            traverse->left->next  = traverse->right;
+            traverse->right->next = traverse->next != NULL ? traverse->next->left : NULL;
             traverse = traverse->next;
         } 
         connect(root->left);

@@ -8,6 +8,7 @@ public:
         dfs(ret, vec, s, 0);
         return ret;
     }
+    
     void dfs(vector<vector<string>> &ret, vector<string> vec, string s, int start){
         if(start == s.size()){ 
             ret.push_back(vec);
@@ -21,6 +22,7 @@ public:
             }
         }
     }
+    
     bool isPalindrome(int start, int end, string str){
         while(start < end){
             if(str[start] != str[end]) return false;

@@ -1,9 +1,8 @@
 class Solution {
 public:
-    // straight forward solution
+    // straight-forward implementation
     vector<int> plusOne(vector<int> &digits) {
-        if(digits.empty())
-            return digits;
+        if(digits.empty()) return digits;
         
         int i = digits.size() - 1;
         int carry = (digits[i]+1) / 10;

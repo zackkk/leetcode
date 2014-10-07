@@ -8,8 +8,9 @@
  */
 class Solution {
 public:
+    // straight-forward implementation
     ListNode *partition(ListNode *head, int x) {
-        if(NULL == head) return NULL;
+        if(head == NULL) return NULL;
         
         ListNode *lessHead = new ListNode(-1);
         ListNode *greaterHead = new ListNode(-1);
@@ -17,7 +18,7 @@ public:
         ListNode *lessPrev = lessHead;
         ListNode *greaterPrev = greaterHead;
         
-        while(NULL != head){
+        while(head != NULL){
             ListNode *nt = head->next;
             if(head->val < x){
                 lessPrev->next = head;

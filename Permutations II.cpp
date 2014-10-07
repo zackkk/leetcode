@@ -9,6 +9,7 @@ public:
         dfs(ret, vec, num, visited);
         return ret;
     }
+    
     void dfs(vector<vector<int>> &ret, vector<int> vec, vector<int> &num, vector<bool> visited){
         if(num.size() == vec.size()){
             ret.push_back(vec);

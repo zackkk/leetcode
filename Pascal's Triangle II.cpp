@@ -1,16 +1,14 @@
 class Solution {
 public:
-    // straight forward solution
+    // straight-forward implementation
     vector<int> getRow(int rowIndex) {
         vector<int> vec;
         
         vec.push_back(1);
-        if(0 == rowIndex) 
-            return vec;
+        if(rowIndex == 0) return vec;
             
         vec.push_back(1);
-        if(1 == rowIndex)
-            return vec;
+        if(rowIndex == 1) return vec;
             
         for(int i = 2; i <= rowIndex; i++){
             for(int j = vec.size() - 1; j >= 1; j--){
