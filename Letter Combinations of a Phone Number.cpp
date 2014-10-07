@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // straight-forward implementation
     vector<string> letterCombinations(string digits) {
         map<char, string> myMap;
         myMap['1'] = "";

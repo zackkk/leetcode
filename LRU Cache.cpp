@@ -5,12 +5,7 @@ struct Node{
     Node *next;
     int key;
     int val;
-    Node(int k, int v){ // no keyword like "public" ...
-        key = k;
-        val = v;
-        prev = NULL;
-        next = NULL;
-    }
+    Node(int k, int v) : key(k), val(v), prev(NULL), next(NULL) {} 
 };
 
 class LRUCache{
@@ -31,14 +26,13 @@ public:
     
     int get(int key) {
         if(m.find(key) == m.end()) {
-			return -1;
-		}
+            return -1;
+        }
         
         // update cache
         Node *current = m[key];
         current->prev->next = current->next;
         current->next->prev = current->prev;
-        
         MoveToTail(current);
         
         return m[key]->val;
@@ -46,8 +40,8 @@ public:
     
     void set(int key, int value) {
         // if key exists, update value
-        if(get(key) != -1){ // updated linked list in get
-			m[key]->val = value;
+        if(get(key) != -1){ // updated linked list in "get"
+            m[key]->val = value;
             return;
         }
         // discard LRU is full, discard the first element
@@ -60,7 +54,6 @@ public:
         // insert new 
         Node *newNode = new Node(key, value);
         m[key] = newNode;
-
         MoveToTail(newNode);
     }
     

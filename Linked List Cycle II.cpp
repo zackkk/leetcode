@@ -12,22 +12,23 @@ public:
     // y = k + t + c
     // y = 2x ---> k + t = c ---> move meet pointer k steps forward
     ListNode *detectCycle(ListNode *head) {
-        if(NULL == head || NULL == head->next)
+        if(head == NULL || head->next == NULL)
             return NULL;
+            
         ListNode *slow = head;
         ListNode *fast = head;
-        while(NULL != slow && NULL != fast){
+        while(slow != NULL && fast != NULL){
             slow = slow->next;
             fast = fast->next;
-            if(NULL != fast)
+            if(fast != NULL)
                 fast = fast->next;
-            if(slow == fast)
+            if(fast == slow)
                 break;
         }
         if(NULL == fast)
             return NULL;
         
-        // move meet pointer k steps forward
+        // point: move "slow" back to head, then move them k steps forward
         slow = head;
         while(slow != fast){
             slow = slow->next;

@@ -10,17 +10,16 @@ class Solution {
 public:
     // fast and slow will meet some time if there is a cycle
     bool hasCycle(ListNode *head) {
-        if(NULL == head)
-            return false;
+        if(head == NULL) return false;
         
         ListNode *slow = head;
         ListNode *fast = head;
-        while(NULL != slow->next && NULL != fast->next){
+        while(slow->next != NULL && fast->next != NULL){
             slow = slow->next;
             fast = fast->next->next;
-            if(slow == fast)
+            if(fast == slow)
                 return true;
-            if(NULL == fast)
+            if(fast == NULL)
                 return false;
         }
         return false;

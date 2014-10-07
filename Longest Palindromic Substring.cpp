@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // start from each position
+    // start from all positions to left & right 
     string longestPalindrome(string s) {
         string ret = "";
         for(int i = 0; i < s.size(); i++){
@@ -12,13 +12,11 @@ public:
         return ret;
     }
     string helper(string s, int i, int j){
-        while(i >= 0 && j < s.size() && s[i] == s[j]){
+        if(s[i] != s[j]) return "";
+        while(i - 1 >= 0 && j + 1 < s.size() && s[i-1] == s[j+1]){
             i--;
             j++;
         }
-        i++;
-        j--;
-        if(j >= i) return s.substr(i, j-i+1); // (position, length)
-        return "";
+        return s.substr(i, j-i+1); // (position, length)
     }
 };

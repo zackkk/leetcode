@@ -11,9 +11,12 @@ public:
         int slow = 0;
         int fast = 0;
         while(fast < s.size()){
+            
+            // no repeating chars
             if(myset.find(s[fast]) == myset.end()){
                 myset.insert(s[fast]);
             }
+            // has repeating char
             else{
                 maxLen = max(maxLen, fast - slow);
                 while(s[slow] != s[fast]){
