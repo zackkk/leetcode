@@ -22,6 +22,7 @@ public:
         }
         reverse(num, 0, num.size()-1); // special case: 6 5 4 3 2 1
     }
+    
     void swap(vector<int> &num, int i, int j) {
         int tmp = num[i];
         num[i] = num[j];
