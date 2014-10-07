@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // in place
     void merge(int A[], int m, int B[], int n) {
         int i = m + n -1;
         // treat m & n as indexes

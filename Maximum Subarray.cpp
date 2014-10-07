@@ -1,12 +1,12 @@
 class Solution {
 public:
     int maxSubArray(int A[], int n) {
-        int max = INT_MIN;
-        int subMax = 0;
+        int maxsum = INT_MIN;
+        int sum = 0;
         for(int i = 0; i < n; i++){
-            subMax = subMax+A[i] > A[i] ? subMax+A[i] : A[i];
-            max = subMax > max ? subMax : max;
+            sum = max(sum + A[i] , A[i]);
+            maxsum = max(maxsum, sum);
         }
-        return max;
+        return maxsum;
     }
 };

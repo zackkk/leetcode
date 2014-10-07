@@ -6,44 +6,37 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+struct mergeCmp{
+    bool operator()(ListNode a, ListNode b){ // b will have higher priority
+        return b.val < a.val;
+    }
+};
+ 
 class Solution {
 public:
-    // 1. merge 2
-    // 2. merge sort- divide and conquer
-    // 3. priority queue (min heap)
+    // 1. merge 2 ---> Time limit exceeded
+    // 2. priority queue (min heap)
+    // 3. merge sort- divide and conquer
     ListNode *mergeKLists(vector<ListNode *> &lists) {
-        if(lists.size() == 0) return NULL;
-        ListNode *cur = lists[0];
-        for(int i = 1; i < lists.size(); i++){
-            cur = mergeTwoLists(cur, lists[i]);
-        }
-        return cur;
-    }
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        ListNode *newHead = new ListNode(-1); // not a build-in type, need new
-        ListNode *cur = newHead;
-        while(NULL != l1 || NULL != l2){
-            if (NULL == l1){
-                cur->next = l2;
-                break;
-            }
-            else if (NULL == l2){
-                cur->next = l1;
-                break;
-            }
-            else{
-                if(l1->val < l2->val){
-                    cur->next = l1;
-                    l1 = l1->next;
-                    cur = cur->next;
-                }
-                else{
-                    cur->next = l2;
-                    l2 = l2->next;
-                    cur = cur->next;
-                }
+        priority_queue<int, vector<int>, mergeCmp> pq;
+        for(int i = 0; i < lists.size(); i++){
+            ListNode *head = lists[i];
+            while(head != NULL){
+                pq.push(head->val);
+                head = head->next;
             }
         }
-        return newHead->next;
+        
+        ListNode *dummy = new ListNode(-1);
+        ListNode *prev = dummy;
+        while(!pq.empty()){
+            int tmp = pq.top();
+            pq.pop();
+            ListNode *ln = new ListNode(tmp);
+            prev->next = ln;
+            prev = ln;
+        }
+        
+        return dummy->next;
     }
 };

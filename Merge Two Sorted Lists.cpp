@@ -9,14 +9,14 @@
 class Solution {
 public:
     ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-        ListNode *newHead = new ListNode(-1); // not a build-in type, need new
-        ListNode *cur = newHead;
-        while(NULL != l1 || NULL != l2){
-            if (NULL == l1){
+        ListNode *dummy = new ListNode(-1); // not a build-in type, need new
+        ListNode *cur = dummy;
+        while(l1 != NULL || l2 != NULL){
+            if (l1 == NULL){
                 cur->next = l2;
                 break;
             }
-            else if (NULL == l2){
+            else if (l2 == NULL){
                 cur->next = l1;
                 break;
             }
@@ -33,6 +33,6 @@ public:
                 }
             }
         }
-        return newHead->next;
+        return dummy->next;
     }
 };

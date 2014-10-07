@@ -9,12 +9,13 @@
  */
 class Solution {
 public:
+    // corner case: doesn't have two children
     int minDepth(TreeNode *root) {
         if(root == NULL) return 0;
         return helper(root);
     }
     int helper(TreeNode *root){
-        if(root == NULL)  // corner case: root has no right child 
+        if(root == NULL)  // corner case: root has no right child, 1-2-#-#-# 
             return INT_MAX;
         if(root->left == NULL && root->right == NULL)
             return 1;

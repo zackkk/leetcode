@@ -20,6 +20,7 @@ public:
         if(intervals.size() == 0) return ret;
         Interval cur = intervals[0];
         for(int i = 1; i < intervals.size(); i++){
+            
             // no overlap
             if(intervals[i].start > cur.end){
                 ret.push_back(cur);
@@ -27,10 +28,10 @@ public:
             }
             // overlap
             else{
-                int min = cur.start < intervals[i].start ? cur.start : intervals[i].start;
-                int max = cur.end   > intervals[i].end   ? cur.end   : intervals[i].end;
-                cur.start = min;
-                cur.end   = max;
+                int minstart = min(cur.start , intervals[i].start);
+                int maxend   = max(cur.end   , intervals[i].end);
+                cur.start = minstart;
+                cur.end   = maxend;
             }
         }
         ret.push_back(cur);

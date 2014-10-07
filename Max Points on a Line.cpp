@@ -12,7 +12,7 @@ public:
     // y = kx + b
     int maxPoints(vector<Point> &points) {
         if(points.size() == 0) return 0;
-        int retMax = 0;
+        int maxnum = 0;
         map<float, int> m; // <slope, count>
         for(int i = 0; i < points.size(); i++){ // for each point, find a line with max points
             int itself = 0;  // corner case 1
@@ -29,14 +29,14 @@ public:
                     else m[k]++;
                 }
             }
-            int kMax = 0;
-			for(map<float, int>::iterator it = m.begin(); it != m.end(); ++it){   // used for loop, bug happened here
-				kMax = max(kMax, it->second);
+            int tmp = 0;
+            for(auto it = m.begin(); it != m.end(); ++it){   // used for loop, bug happened here
+                tmp = max(tmp, it->second);
             }
-            retMax = max(retMax, kMax + itself);
-            retMax = max(retMax, infinite + itself);
+            maxnum = max(maxnum, tmp + itself);
+            maxnum = max(maxnum, infinite + itself);
             m.clear();
         }
-        return retMax;
+        return maxnum;
     }
 };
