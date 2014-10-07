@@ -7,7 +7,7 @@
  * };
  */
 struct mergeCmp{
-    bool operator()(ListNode a, ListNode b){ // b will have higher priority
+    bool operator()(const ListNode &a, const ListNode &b){ // b will have higher priority
         return b.val < a.val;
     }
 };
