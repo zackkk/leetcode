@@ -8,11 +8,11 @@
  */
 class Solution {
 public:
+    // maintain a sorted linked list 
     ListNode *insertionSortList(ListNode *head) {
         ListNode *dummy = new ListNode(0);
-        while(NULL != head){
+        while(head != NULL){
             ListNode *node = dummy;
-            // insert "head" after "node"
             while(node->next != NULL && node->next->val < head->val){
                 node = node->next;
             }

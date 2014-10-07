@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // KMP
+    // KMP, return substring pointer if existed in C
     char *strStr(char *haystack, char *needle) {
         if(haystack == NULL || needle == NULL){
             return NULL;

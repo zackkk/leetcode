@@ -4,16 +4,14 @@ public:
     int jump(int A[], int n) {
         if(n <= 1) return 0;
         int steps = 1;
-        int maxDistCanReach = A[0];
-        int next_maxDistCanReach = maxDistCanReach;
+        int canJumpMaxDist = A[0];
+        int next_canJumpMaxDist = A[0];
         for(int i = 1; i < n; i++){
-            if(i > maxDistCanReach){
-                maxDistCanReach = next_maxDistCanReach;
+            if(i > canJumpMaxDist){
+                canJumpMaxDist = next_canJumpMaxDist;
                 steps++;
             }
-            if(A[i] + i > next_maxDistCanReach){
-                next_maxDistCanReach = A[i] + i;
-            }
+            next_canJumpMaxDist = max(next_canJumpMaxDist, A[i] + i);
         }
         return steps;
     }
