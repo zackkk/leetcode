@@ -8,16 +8,18 @@
  */
 class Solution {
 public:
+    // dummy
     ListNode *deleteDuplicates(ListNode *head) {
-        ListNode *prev_head = new ListNode(-1);
-        prev_head->next = head;
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
         
-        ListNode *prev = prev_head;
+        ListNode *prev = dummy;
         ListNode *cur = head;
-        while(NULL != cur){
-            // delete duplicates
-            if(NULL != cur->next && cur->next->val == cur->val){
-                while(NULL != cur->next && cur->next->val == cur->val){
+        while(cur != NULL){
+            
+            // found duplicates
+            if(cur->next != NULL && cur->next->val == cur->val){
+                while(cur->next != NULL && cur->next->val == cur->val){
                     cur = cur->next;
                 }
                 cur = cur->next;
@@ -29,6 +31,6 @@ public:
                 cur = cur->next;
             }
         }
-        return prev_head->next;
+        return dummy->next;
     }
 };

@@ -8,18 +8,21 @@
  */
 class Solution {
 public:
+    // 1. check if we need to reverse
+    // 2. reverse using prev trick
     ListNode *reverseKGroup(ListNode *head, int k) {
         if(k <= 1) return head;
-        ListNode *prev_head = new ListNode(-1);
-        prev_head->next = head;
-        
-        ListNode *prev = prev_head;
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *prev = dummy;
         ListNode *cur = head; // cur will move "automatically"
-        while(NULL != cur){
+        
+        while(cur != NULL){
+            
             // check if we need to reverse
             int count = 1;
             ListNode *it = cur;
-            while(NULL != it->next){ count++; it = it->next; } 
+            while(it->next != NULL){ count++; it = it->next; } 
             if(count < k) break;
             
             // need to reverse
@@ -35,6 +38,6 @@ public:
             prev = cur;
             cur = cur->next;
         }
-        return prev_head->next;
+        return dummy->next;
     }
 };

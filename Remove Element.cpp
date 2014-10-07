@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // slow & fast 
+    // slow & fast "pointers"
     int removeElement(int A[], int n, int elem) {
         int slow = 0;
         for(int fast = 0; fast < n; fast++){

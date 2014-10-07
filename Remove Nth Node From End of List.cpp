@@ -8,7 +8,7 @@
  */
 class Solution {
 public:
-    // slow & fast
+    // slow & fast "pointers"
     ListNode *removeNthFromEnd(ListNode *head, int n) {
         // n will always be valid
         ListNode *slow = head;
@@ -19,11 +19,11 @@ public:
             n--;
         }
         // corner case: remove the first element
-        if(NULL == fast)
+        if(fast == NULL)
             return head->next;
             
         ListNode *prev = NULL;
-        while(NULL != fast){
+        while(fast != NULL){
             prev = slow;
             slow = slow->next;
             fast = fast->next;

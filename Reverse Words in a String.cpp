@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // iterate from end to start
+    // iterate from end to start, can do it in place
     void reverseWords(string &s) {
         string ret;
         int i = s.size() - 1;

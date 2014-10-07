@@ -8,11 +8,12 @@
  */
 class Solution {
 public:
+    // straight-forward implementation
     ListNode *deleteDuplicates(ListNode *head) {
         ListNode *cur = head;
-        while(NULL != cur){
+        while(cur != NULL){
             ListNode *nt = cur->next;
-            while(NULL != nt && nt->val == cur->val)
+            while(nt != NULL && nt->val == cur->val)
                 nt = nt->next;
             cur->next = nt;
             cur = nt;

@@ -12,9 +12,9 @@ public:
     // 1->3->2->4->5
     // 1->4->3->2->5
     ListNode *reverseBetween(ListNode *head, int m, int n) {
-        ListNode *preHead = new ListNode(-1);
-        preHead->next = head;
-        ListNode *prev = preHead;
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *prev = dummy;
         ListNode *cur = head;
         int pos = 1; // cur pos
         
@@ -24,7 +24,7 @@ public:
             cur = cur->next;
         }
         
-        while(pos < n && NULL != cur->next){
+        while(pos < n && cur->next != NULL){
             pos++;
             // save all to avoid dependency mess
             ListNode *nt = cur->next;
@@ -35,6 +35,6 @@ public:
             cur->next = nt_nt;
             nt->next = prev_nt;
         }
-        return preHead->next;
+        return dummy->next;
     }
 };

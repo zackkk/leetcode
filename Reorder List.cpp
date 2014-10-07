@@ -8,24 +8,26 @@
  */
 class Solution {
 public:
-    // get inserted nodes -> reverse inserted nodes -> combine two
+    // 1. cut into halfs 
+    // 2. reverse insert nodes 
+    // 3. combine two
     void reorderList(ListNode *head) {
-        if(NULL == head || NULL == head->next)
+        if(head == NULL || head->next == NULL)
             return;
         
-        // get inserted nodes
+        // cut into halfs 
         ListNode *slow = head;
         ListNode *fast = head;
-        while(NULL != fast && NULL != fast->next){
+        while(fast != NULL && fast->next != NULL){
             slow = slow->next;
             fast = fast->next->next;
         }
         ListNode *cur = slow->next;
         slow->next = NULL;
         
-        // reverse inserted nodes
+        // reverse insert nodes
         ListNode *rightPrevHead = new ListNode(-1);
-        while(NULL != cur){
+        while(cur != NULL){
             ListNode *nt = cur->next;
             cur->next = rightPrevHead->next;
             rightPrevHead->next = cur;
@@ -37,7 +39,7 @@ public:
         ListNode *right = rightPrevHead->next;
         ListNode *left_nt = NULL;
         ListNode *right_nt = NULL;
-        while(NULL != right){
+        while(right != NULL){
             left_nt = left->next;
             right_nt = right->next;
             left->next = right;

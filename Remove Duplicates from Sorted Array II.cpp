@@ -1,7 +1,7 @@
 class Solution {
 public:
     // extra space : map
-    // in place : count the number of "slow"
+    // in place : slow & fast, and count the number of "slow"
     int removeDuplicates(int A[], int n) {
         if(n <= 1) return n;
         int slow = 0;

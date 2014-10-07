@@ -1,11 +1,11 @@
 class Solution {
 public:
+     // Lucy Can't Drink Milk
     int romanToInt(string s) {
         map<char,int> myMap;
         myMap['I'] = 1;
         myMap['V'] = 5;
         myMap['X'] = 10;
-        // Lucy Can't Drink Milk
         myMap['L'] = 50;
         myMap['C'] = 100;
         myMap['D'] = 500;
