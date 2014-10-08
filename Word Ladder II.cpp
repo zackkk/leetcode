@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // bfs + dfs, use a map to save fathers in bfs, then use dfs to do back tracking
+    // bfs + dfs, use bfs to find the target & use a map to save fathers, then use dfs to do back tracking
     // use build-in funcs: swap, reverse. use keyword: auto
     vector<vector<string>> findLadders(string start, string end, unordered_set<string> &dict) {
         vector<vector<string>> ret;

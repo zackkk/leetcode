@@ -1,36 +1,30 @@
 class Solution {
 public:
-    // dfs ---> 1d dp : http://changhaz.wordpress.com/2014/04/30/leetcode-word-break-ii/
-    // save all "solutions" at position i, iterate from tail to head.
-    
+    // 1d dp, from tail to head
+    // save all "solutions" at position i
     vector<string> wordBreak(string s, unordered_set<string> &dict) {
-        //vector<vector<string>> vv (s.size(), vector<string> (s.size(), ""));
-        vector<vector<string>> vv;
-        for(int i = 0; i < s.size(); i++){
-            vector<string> tmp_vs;
-            vv.push_back(tmp_vs);
-        }
-
+        vector<vector<string>> vv (s.size(), vector<string> ());
+        
         // tip: string malipulation: from back to end, easier to get a string
         for(int i = s.size()-1; i >= 0; i--){
             for(int j = i; j < s.size(); j++){
-                string tmp_str = s.substr(i, j-i+1);
-                if(dict.find(tmp_str) != dict.end()){
+                string tmp = s.substr(i, j-i+1);
+                if(dict.find(tmp) != dict.end()){
+                    
                     vector<string> vec;
                     if(j == s.size()-1){
-                        vec.push_back(tmp_str);
+                        vec.push_back(tmp);
                     }
                     else{
-						vec = vv[j+1];
-						for(int i = 0; i < vec.size(); i++)
-							vec[i] = tmp_str + " " + vec[i];
+                        // if vv[j+1] is empty, then nothing will be inserted into vv[i]
+                        vec = vv[j+1];
+                        for(int k = 0; k < vec.size(); k++)
+                            vec[k] = tmp + " " + vec[k];
                     }
-					vector<string> vvi = vv[i];
-					vvi.insert(vvi.end(), vec.begin(), vec.end());
-                    vv[i] = vvi;
+                    vv[i].insert(vv[i].end(), vec.begin(), vec.end()); // add one more solution at the tail
                 }
             }
         }
-		return vv[0];
+        return vv[0];
     }
 };

@@ -9,11 +9,10 @@ public:
         int curRow = -1;
         
         for(int i = 0; i < s.size(); i++){
-            if(incFlag) curRow++;
-            else curRow--;
+            curRow = incFlag ? curRow + 1 : curRow - 1;
             rows[curRow] += s[i];
             
-            // update tendency
+            // update increase flag
             if(curRow == nRows - 1) 
                 incFlag = false;
             else if(curRow == 0) 

@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // 1d dp ---> dp[i] donates s[0, i-1] can be segmented
+    // 1d dp, dp[i] can be segmented or not
     bool wordBreak(string s, unordered_set<string> &dict) {
         int n = s.size();
         vector<bool> dp (n, false);

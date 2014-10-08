@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // dfs, can use itself as visited array
+    // dfs
     bool exist(vector<vector<char> > &board, string word) {
         int m = board.size();
         int n = board[0].size();

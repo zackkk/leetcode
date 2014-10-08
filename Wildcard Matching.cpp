@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // two "star" pointers for going back to match
+    // two "star" pointers for going back to match, "*" matches zero times at the beginning
     bool isMatch(const char *s, const char *p) {
         const char *star_p = NULL; // store the position of the last "*"
         const char *star_p_s = s; // store the mapping position of the last "*" in s
@@ -13,7 +13,7 @@ public:
                 continue;
             }
             
-            // "*" appears, match zero times, "******..." equals "*"
+            // one "star" in p can match everything, so we save only the most recent "star"
             if(*p == '*'){
                 star_p = p; 
                 star_p_s = s;

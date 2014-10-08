@@ -1,9 +1,8 @@
 class Solution {
 public:
-    // bfs, two queues
+    // bfs, word queue + dist queue
     int ladderLength(string start, string end, unordered_set<string> &dict) {
-        if(start == "")
-            return 0;
+        if(start == "") return 0;
         
         queue<string> wordQueue;
         queue<int> distQueue;
@@ -16,8 +15,7 @@ public:
             int curDist = distQueue.front();
             distQueue.pop();
             
-            if(curWord == end)
-                return curDist; 
+            if(curWord == end) return curDist; 
                 
             // put all words in dict that have distance one, of the current word
             // O(26 * len(word))
