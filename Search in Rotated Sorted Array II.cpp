@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // binary search, CC150
     bool search(int A[], int n, int target) {
         if(A == NULL || n == 0) return false;
         int l = 0;
@@ -13,7 +14,7 @@ public:
                 else
                     l = m+1;
             }
-            else if(A[l] == A[m]){
+            else if(A[l] == A[m]){   // the diff line compared with "no duplicates"
                 l++; 
             }
             else{ // right sorted

@@ -1,6 +1,7 @@
 class Solution {
 public:
-    // not dfs... ---> iteration
+    // 1. not dfs... ---> iteration
+    // 2. bit 2^n possibilities 
     vector<vector<int> > subsets(vector<int> &S) {
         sort(S.begin(), S.end());
         vector<vector<int>> prev;

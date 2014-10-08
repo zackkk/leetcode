@@ -1,6 +1,7 @@
 class Solution {
 public:
     // binary search: transfer 2d into 1d
+    // if the second condition doesn't, then we can start from the right-top corner.
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
         int m = matrix.size();
         int n = matrix[0].size();

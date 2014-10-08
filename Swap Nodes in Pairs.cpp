@@ -8,23 +8,23 @@
  */
 class Solution {
 public:
+    // consider four elements one time
     ListNode *swapPairs(ListNode *head) {
-        if(NULL == head || NULL == head->next)
-            return head;
+        if(head == NULL || head->next == NULL) return head;
         ListNode *first = head;
         ListNode *second = first->next;
-        ListNode *newHead = new ListNode(-1);
-        newHead->next = second;
-        while(NULL != first){
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = second;
+        while(first != NULL){
             ListNode *third = second->next;
             // next 0
-            if(NULL == third){
+            if(third == NULL){
                 first->next = NULL;
                 second->next = first;
                 break;
             }
             // next 1
-            if(NULL == third->next){
+            if(third->next == NULL){
                 first->next = third;
                 second->next = first;
                 break;
@@ -35,6 +35,6 @@ public:
             first = third;
             second = third->next;
         }
-        return newHead->next;
+        return dummy->next;
     }
 };

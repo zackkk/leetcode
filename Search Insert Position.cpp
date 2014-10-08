@@ -6,9 +6,9 @@ public:
         int h = n - 1;
         while(l <= h){
             int m = (l + h) / 2;
-            if(target == A[m]) return m;
+            if(A[m] == target) return m;
             if(l < m && A[m-1] < target && target < A[m]) return m; // key
-            if(target < A[m])
+            if(A[m] > target)
                 h = m - 1;
             else
                 l = m + 1;

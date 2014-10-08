@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // binary search
+    // binary search, CC150
     int search(int A[], int n, int target) {
         if(A == NULL || n == 0) return -1; // check A == NULL, bug happened here
         int l = 0;

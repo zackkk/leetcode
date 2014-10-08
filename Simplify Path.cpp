@@ -1,8 +1,8 @@
 class Solution {
 public:
-    // stringstream ss(path); ---> not working
+    // corner cases: multiple slashs, empty stack
     string simplifyPath(string path) {
-        stack<string> st;
+        stack<string> stk;
         for(int i = 0; i < path.size(); i++){
             if(path[i] == '/'){
                 // multiple slashs
@@ -11,6 +11,7 @@ public:
                 }
             }
             else{
+                // get the token
                 int indexLeft = i;
                 int indexRight = i;
                 while(indexRight+1 < path.size() && path[indexRight+1] != '/'){
@@ -18,23 +19,25 @@ public:
                     i++;
                 }
                 string token = path.substr(indexLeft, indexRight-indexLeft+1);
+                
+                // parse the token
                 if(token == ".") 
                     ;
                 else if(token == ".."){ 
-                    if(!st.empty()){ // corner case
-                        st.pop();
+                    if(!stk.empty()){ // corner case
+                        stk.pop();
                     }
                 }
                 else{
-                    st.push(token);
+                    stk.push(token);
                 }
             }
         }
         
-        string ret = st.empty() ?  "/" : "";
-        while(!st.empty()){
-            string token = st.top();
-            st.pop();
+        string ret = stk.empty() ?  "/" : "";
+        while(!stk.empty()){
+            string token = stk.top();
+            stk.pop();
             ret = "/" + token + ret;
         }
         return ret;

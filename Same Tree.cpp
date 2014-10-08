@@ -9,12 +9,11 @@
  */
 class Solution {
 public:
+    // straight-forward implementation
     bool isSameTree(TreeNode *p, TreeNode *q) {
-        if(NULL == p && NULL == q)
+        if(!p && !q)
             return true;
-        if(NULL == p && NULL != q) 
-            return false;
-        if(NULL == q && NULL != p)     
+        if((!p && q) || (p && !q)) 
             return false;
         if(p->val != q->val)
             return false;

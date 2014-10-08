@@ -2,22 +2,19 @@ class Solution {
 public:
     // binary search
     vector<int> searchRange(int A[], int n, int target) {
-        vector<int> ret;
+        vector<int> ret (2, -1);
         int pos = binarySearch(A, 0, n-1, target);
-        if(-1 == pos){
-            ret.push_back(-1);
-            ret.push_back(-1);
-            return ret;
-        }
+        if(pos == -1) return ret;
         
         int left = pos;
         int right = pos;
         while(left - 1 >= 0 && A[left - 1] == target) left--;
         while(right + 1 < n && A[right + 1] == target) right++;
-        ret.push_back(left);
-        ret.push_back(right);
+        ret[0] = left;
+        ret[1] = right;
         return ret;
     }
+    
     int binarySearch(int A[], int low, int high, int target){
         if(low > high) return -1;
         int mid = (low + high) / 2;

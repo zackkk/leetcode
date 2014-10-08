@@ -11,19 +11,20 @@ class Solution {
 int sum = 0;
 public:
     int sumNumbers(TreeNode *root) {
-        if(NULL == root) return 0;
+        if(root == NULL) return 0;
         helper(root, 0);
         return sum;
     }
-    void helper(TreeNode *root, int tmpSum){
+    
+    void helper(TreeNode *root, int tmpsum){
         // leaf
-        if(NULL == root->left && NULL == root->right){
-            sum += (tmpSum + root->val);
+        if(root->left == NULL && root->right == NULL){
+            sum += (tmpsum + root->val);
             return;
         }
-        if(NULL != root->left)
-            helper(root->left, (tmpSum + root->val) * 10);
-        if(NULL != root->right)
-            helper(root->right, (tmpSum + root->val) * 10);
+        if(root->left != NULL)
+            helper(root->left, (tmpsum + root->val) * 10);
+        if(root->right != NULL)
+            helper(root->right, (tmpsum + root->val) * 10);
     }
-};Sum Root to Leaf Numbers
+};

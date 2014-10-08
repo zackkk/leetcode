@@ -1,27 +1,31 @@
 class Solution {
 public:
+    // three "pointers" trick, size of array is already known as n.
     void sortColors(int A[], int n) {
+        if(A == NULL || n <= 1) return;
+        
         int zero = 0;
-        int one = 0;
-        // no need to count two
-        for(int i = 0; i < n; i++){
-            if(A[i] == 0)
+        int two = n - 1;
+        int i = 0;
+        while(i <= two){
+            if(A[i] == 0){
+                swap(A, zero, i);
                 zero++;
-            else if(A[i] == 1)
-                one++;
-        }
-        for(int i = 0; i < n; i++){
-            if(zero > 0){
-                A[i] = 0;
-                zero--;
+                i++;
             }
-            else if(one > 0){
-                A[i] = 1;
-                one--;
+            else if(A[i] == 2){
+                swap(A, two, i);
+                two--;
             }
             else{
-                A[i] = 2;   
+                i++;
             }
         }
+    }
+    
+    void swap(int *A, int i, int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
     }
 };

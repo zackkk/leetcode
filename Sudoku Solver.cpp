@@ -22,6 +22,7 @@ public:
             return dfs(board, row, col+1);
         }
     }
+    
     bool isValid(vector<vector<char> > &board, int row, int col, char val){
         // check same row
         for(int j = 0; j < 9; j++){

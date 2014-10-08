@@ -15,7 +15,7 @@ public:
             else 
                 low = mid + 1;
         }
-        // x is not a square number
+        // corner case: x is not a square number
         if(low * low > x) return (int)(--low);
     }
 };

@@ -1,12 +1,13 @@
 class Solution {
 public:
+    // iteration, similar to Subsets I
+    // solution 2: dfs
     vector<vector<int> > subsetsWithDup(vector<int> &S) {
         sort(S.begin(), S.end());
         vector<vector<int>> prev;
         vector<int> tmp;
         prev.push_back(tmp);
-        if(0 == S.size())
-            return prev;
+        if(S.size() == 0) return prev;
             
         for(int i = 0; i < S.size(); i++){
             vector<vector<int>> cur = prev;

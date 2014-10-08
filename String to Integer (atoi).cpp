@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // corner cases: spaces, sign, out of boundary
     int atoi(const char *str) {
         int i = 0;
         while(str[i] == ' ') i++; // corner case 1: spaces at the beginning

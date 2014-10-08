@@ -1,12 +1,12 @@
 class Solution {
 public:
-    // dfs 'O' elements on the borders
+    // dfs 'O' elements on the borders, use letter 'M' to avoid extra memory
     void solve(vector<vector<char>> &board) {
         if(board.size() == 0) return; // bug happened here !!!
         int rowNum = board.size();
         int colNum = board[0].size();
         
-        // border elements
+        // explore border elements
         for(int i = 0; i < rowNum; i++){
             if(board[i][0] == 'O') dfs(board, i, 0);
             if(board[i][colNum-1] == 'O') dfs(board, i, colNum-1);
