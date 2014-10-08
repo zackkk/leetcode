@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // 2d dp, path
+    // 2d dp
     int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
         if(obstacleGrid[0][0] == 1) return 0;
         int m = obstacleGrid.size();

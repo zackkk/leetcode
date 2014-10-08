@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // 2d dp, path
+    // 2d dp, classic path number question
     int uniquePaths(int m, int n) {
         vector<vector<int>> paths(m, vector<int> (n,0));
         for(int row = 0; row < m; row++) paths[row][0] = 1;

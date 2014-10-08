@@ -9,14 +9,14 @@
  */
 class Solution {
 public:
-    // dfs + recursion
+    // dfs + recursion + BST
     vector<TreeNode *> generateTrees(int n) {
         return generate(1, n);        
     }
     vector<TreeNode *> generate(int low, int high){
         vector<TreeNode *> nodes;
         if(low > high){
-            nodes.push_back(NULL);
+            nodes.push_back(NULL);  // matters
             return nodes;
         }
          
