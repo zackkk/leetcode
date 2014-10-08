@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // straight-forward implementation
     bool isPalindrome(string s) {
         if(s.size() == 0) return true;
         int left  = 0;

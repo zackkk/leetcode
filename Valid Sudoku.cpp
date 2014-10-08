@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // straight-forward implementation
     bool isValidSudoku(vector<vector<char> > &board) {
         // check rows
         for(int i = 0; i < 9; i++){

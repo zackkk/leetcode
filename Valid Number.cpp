@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // hard: consider corner cases
+    // hard 
     // 1. regular expression 2. Finate Autumata Machine: http://blog.csdn.net/kenden23/article/details/18696083
     // [+/-] d.d (E/e)[+/-]d
     bool isNumber(const char *s) {

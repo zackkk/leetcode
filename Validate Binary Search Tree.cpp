@@ -9,14 +9,14 @@
  */
 class Solution {
 public:
+    // CC150
     bool isValidBST(TreeNode *root) {
         return helper(root, INT_MIN, INT_MAX);
     }
     
     bool helper(TreeNode *root, int lowerBound, int upperBound){
-        if(NULL == root) return true;
-        if(root->val <= lowerBound) return false;
-        if(root->val >= upperBound) return false;
+        if(root == NULL) return true;
+        if(root->val <= lowerBound || root->val >= upperBound) return false;
         return helper(root->left, lowerBound, root->val) &&
                helper(root->right, root->val, upperBound);
     }
