@@ -1,6 +1,7 @@
 class Solution {
 public:
     // water volumn depends on left max height and right max height
+    // improve: pre-calculate right max height
     int trap(int A[], int n) {
         if(A == NULL || n == 0) return 0;
         int maxWater = 0;
