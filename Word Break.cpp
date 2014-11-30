@@ -3,16 +3,18 @@ public:
     // 1d dp, dp[i] can be segmented or not
     bool wordBreak(string s, unordered_set<string> &dict) {
         int n = s.size();
-        vector<bool> dp (n, false);
-        for(int i = 0; i < n; i++){
-            if(i == 0 || dp[i-1]){ // can reach 
-                for(string str : dict){
-                    int len = str.size();
-                    if(i + len - 1 < n && s.substr(i, len) == str)
-                        dp[i + len -1] = true;
+        if(n == 0) return true;
+        vector<bool> can_break (n, false);
+        
+        for(int start = 0; start < n; ++start){
+            if(start > 0 && !can_break[start-1]) continue;
+            for(int len = 1; start + len <= n; ++len){
+                string str = s.substr(start, len);
+                if(dict.find(str) != dict.end()){
+                    can_break[start+len-1] = true;
                 }
             }
         }
-        return dp[n-1];
+        return can_break[n-1];
     }
 };

@@ -2,26 +2,21 @@ class Solution {
 public:
     // key: increase then update increase flag
     string convert(string s, int nRows) {
-        if(nRows == 1) return s; // special case
-        vector<string> rows (nRows, "");
-       
-        bool incFlag = true;
-        int curRow = -1;
+        if(nRows <= 1) return s;
+        vector<string> strs (nRows, "");
         
-        for(int i = 0; i < s.size(); i++){
-            curRow = incFlag ? curRow + 1 : curRow - 1;
-            rows[curRow] += s[i];
+        bool flag = true;
+        int index = -1;
+        for(int i = 0; i < s.size(); ++i){
+            index = flag ? index+1 : index-1;
+            strs[index] += s[i];
             
-            // update increase flag
-            if(curRow == nRows - 1) 
-                incFlag = false;
-            else if(curRow == 0) 
-                incFlag = true;
+            if(index == nRows - 1) flag = false;
+            else if(index == 0) flag = true;
         }
         
-        string ret;
-        for(int i = 0; i < nRows; i++)
-            ret += rows[i];
+        string ret = "";
+        for(string str : strs) ret += str;
         return ret;
     }
 };

@@ -1,7 +1,7 @@
 class Solution {
 public:
-    // 1d dp, from tail to head
-    // save all "solutions" at position i
+    // from head to tail -> Memory Limit Exceeded
+    // 1d dp, from tail to head , save all "solutions" at position i
     vector<string> wordBreak(string s, unordered_set<string> &dict) {
         vector<vector<string>> vv (s.size(), vector<string> ());
         
