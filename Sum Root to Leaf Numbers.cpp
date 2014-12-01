@@ -8,7 +8,8 @@
  * };
  */
 class Solution {
-int sum = 0;
+private:
+    int sum = 0;
 public:
     int sumNumbers(TreeNode *root) {
         if(root == NULL) return 0;
@@ -16,15 +17,13 @@ public:
         return sum;
     }
     
-    void helper(TreeNode *root, int tmpsum){
-        // leaf
+    void helper(TreeNode *root, int value){
         if(root->left == NULL && root->right == NULL){
-            sum += (tmpsum + root->val);
+            sum += (root->val + value);
             return;
         }
-        if(root->left != NULL)
-            helper(root->left, (tmpsum + root->val) * 10);
-        if(root->right != NULL)
-            helper(root->right, (tmpsum + root->val) * 10);
+        
+        if(root->left)  helper(root->left, (value + root->val) * 10);
+        if(root->right) helper(root->right, (value + root->val) * 10);
     }
 };

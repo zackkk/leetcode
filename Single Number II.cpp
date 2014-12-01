@@ -3,13 +3,13 @@ public:
     // bit manipulation
     int singleNumber(int A[], int n) {
         int ret = 0;
-        // consider each bit
-        for(int i = 0; i < 32; i++){
-            int bitsum = 0;
-            for(int j = 0; j < n; j++){
-                bitsum += ((A[j] >> i) & 1);
+        for(int i = 0; i < 32; ++i){
+            int sum = 0;
+            for(int j = 0; j < n; ++j){
+                sum += A[j] >> i & 1; 
             }
-            ret |= ((bitsum % 3) << i);
+            sum %= 3;
+            ret += sum << i;
         }
         return ret;
     }

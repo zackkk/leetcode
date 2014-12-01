@@ -3,26 +3,28 @@ public:
     // map<word, frequency>
     vector<int> findSubstring(string S, vector<string> &L) {
         vector<int> ret;
-        if(L.size() == 0) return ret;
+        if(S.size() == 0 || L.size() == 0) return ret;
         
-        map<string, int> m; // to find
-        for(int i = 0; i < L.size(); i++){ m[L[i]]++; } // default value: 0
-
-        int wordLen = L[0].size();
-        int wordNum = L.size();
+        map<string, int> m;
+        for(string str : L) m[str]++;
         
-        for(int i = 0; i + wordNum * wordLen <= S.size(); i++){ // i <= S.size() - wordNum * wordLen will overflow
-            map<string, int> tmp_map; // found
-            int j = 0;
-        
-            for(; j < wordNum; j++){
-                string tmp_word = S.substr(i+j*wordLen, wordLen); // (position, length)
-                if(!m[tmp_word]) { break; }
-                tmp_map[tmp_word]++;
-                if (tmp_map[tmp_word] > m[tmp_word]) { break;}
+        int word_num = L.size();
+        int word_len = L[0].size();
+        for(int i = 0; i + word_len * word_num <= S.size(); ++i){
+            
+            map<string, int> tmp_m = m;
+            bool flag = true;
+            for(int j = i; j < i + word_len * word_num; j += word_len){
+                string tmp_str = S.substr(j, word_len);
+                tmp_m[tmp_str]--;
+                if(tmp_m[tmp_str] < 0) { flag = false; break; }
             }
-            if(j  == wordNum)
-                ret.push_back(i);
+            for(auto it = tmp_m.begin(); it != tmp_m.end(); ++it){
+                if(it->second > 0){
+                    flag = false; break;
+                }
+            }
+            if(flag) ret.push_back(i);
         }
         return ret;
     }

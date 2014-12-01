@@ -2,44 +2,38 @@ class Solution {
 public:
     // corner cases: multiple slashs, empty stack
     string simplifyPath(string path) {
+        vector<string> tokens;
+        split(path, tokens);
         stack<string> stk;
-        for(int i = 0; i < path.size(); i++){
-            if(path[i] == '/'){
-                // multiple slashs
-                while(i+1 < path.size() && path[i+1] == '/') { // corner case
-                    i++;
-                }
+        for(string token : tokens){
+            if(token == ".") 
+                continue;
+            else if(token == ".."){
+                if(!stk.empty())
+                    stk.pop();
             }
-            else{
-                // get the token
-                int indexLeft = i;
-                int indexRight = i;
-                while(indexRight+1 < path.size() && path[indexRight+1] != '/'){
-                    indexRight++;
-                    i++;
-                }
-                string token = path.substr(indexLeft, indexRight-indexLeft+1);
-                
-                // parse the token
-                if(token == ".") 
-                    ;
-                else if(token == ".."){ 
-                    if(!stk.empty()){ // corner case
-                        stk.pop();
-                    }
-                }
-                else{
-                    stk.push(token);
-                }
-            }
+            else
+                stk.push(token);
         }
         
-        string ret = stk.empty() ?  "/" : "";
+        string ret = "";
         while(!stk.empty()){
-            string token = stk.top();
+            string tmp = stk.top();
             stk.pop();
-            ret = "/" + token + ret;
+            ret = "/" + tmp + ret;
         }
-        return ret;
+        return ret == "" ? "/" : ret;
+        
+    }
+    
+    void split(string path, vector<string> &tokens){
+        int i = 0;
+        while(i < path.size()){
+            while(i < path.size() && path[i] == '/') i++;
+            int start = i;
+            while(i < path.size() && path[i] != '/') i++;
+            int end = i;
+            if(end > start) tokens.push_back(path.substr(start, end - start));
+        }
     }
 };

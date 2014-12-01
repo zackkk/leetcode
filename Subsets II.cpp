@@ -1,30 +1,24 @@
 class Solution {
 public:
-    // iteration, similar to Subsets I
-    // solution 2: dfs
     vector<vector<int> > subsetsWithDup(vector<int> &S) {
-        sort(S.begin(), S.end());
-        vector<vector<int>> prev;
-        vector<int> tmp;
-        prev.push_back(tmp);
-        if(S.size() == 0) return prev;
-            
-        for(int i = 0; i < S.size(); i++){
-            vector<vector<int>> cur = prev;
-            for(int j = 0; j < prev.size(); j++){
-                vector<int> tmp = prev[j];
-                tmp.push_back(S[i]);
-                cur.push_back(tmp);
+        sort(S.begin(), S.end()); 
+        vector<vector<int> > ret;
+        vector<int> v;
+        ret.push_back(v);
+        
+        for(int i : S){
+            vector<vector<int> > tmp = ret;
+            for(vector<int> vec : tmp){
+                vec.push_back(i);
+                ret.push_back(vec);
             }
-            prev = cur;
         }
         
-        // use set to get rid of duplicates
-        set<vector<int>> mySet;
-        for(int i = 0; i < prev.size(); i++)
-            mySet.insert(prev[i]);
-        vector<vector<int>> ret;
-        ret.assign(mySet.begin(), mySet.end()); // new
+        set<vector<int>> s;
+        for(vector<int> vec : ret){ s.insert(vec); }
+        ret.clear();
+        ret.assign(s.begin(), s.end());
+        
         return ret;
     }
 };

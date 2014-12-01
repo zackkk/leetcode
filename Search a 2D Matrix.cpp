@@ -4,18 +4,21 @@ public:
     // if the second condition doesn't, then we can start from the right-top corner.
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
         int m = matrix.size();
+        if(m == 0) return false;
         int n = matrix[0].size();
-        int start = 0;
-        int end = m * n - 1;
-        while(start <= end){
-            int mid = (start + end) / 2;
-            int num = matrix[mid / n][mid % n];
-            if(target == num)
-                return true;
-            if(target > num)
-                start = mid + 1;
+        
+        int lo = 0;
+        int hi = m * n - 1;
+        
+        while(lo <= hi){
+            int mi = lo + (hi - lo) / 2;
+            int num = matrix[mi/n][mi%n];
+            
+            if(num == target) return true;
+            if(num > target)
+                hi = mi - 1;
             else
-                end = mid - 1;
+                lo = mi + 1;
         }
         return false;
     }

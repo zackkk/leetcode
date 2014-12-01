@@ -12,7 +12,7 @@ public:
         ret[0][0] = k++;
         while(k <= n*n){
             // go to right
-            while(j + 1 < n && ret[i][j+1] == 0){
+            while(j + 1 < n && ret[i][j+1] == 0){ // use "0" as visited flag
                 j++;
                 ret[i][j] = k++;
             }

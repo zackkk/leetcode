@@ -23,7 +23,7 @@ public:
         }
     }
     
-    void swap(int *A, int i, int j){
+    void swap(int *A, int i, int j){ // "int *A"
         int tmp = A[i];
         A[i] = A[j];
         A[j] = tmp;
