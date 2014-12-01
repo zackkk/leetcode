@@ -1,43 +1,34 @@
 class Solution {
 public:
-    // dfs (classic)
     vector<vector<string> > solveNQueens(int n) {
+        vector<int> rows (n, 0);
         vector<vector<string>> ret;
-        vector<string> vec;
-        vector<int> A (n, 0); // auto get rid of row duplicates, can't use array since n is unknown
-        dfs(ret, A, n, 0);
+        string s = "";
+        for(int i = 0; i < n; ++i) s += ".";
+        dfs(rows, 0, n, ret, s);
         return ret;
     }
     
-    void dfs(vector<vector<string>> &ret, vector<int> &A, int n, int row){
-        // produce result
-        if(row == n){
-            vector<string> vec;
-            for(int i = 0; i < n; i++){
-                string str = "";
-                for(int j = 0; j < n; j++){
-                    char c;
-                    c = j == A[i] ? 'Q' : '.';
-                    str += c;
-                }
-                vec.push_back(str);
-            }
-            ret.push_back(vec);
+    void dfs(vector<int> &rows, int cur, int n, vector<vector<string>> &ret, string &s){
+        if(cur == n){
+            vector<string> v (n, s);
+            for(int i = 0; i < n; ++i) v[i][rows[i]] = 'Q';
+            ret.push_back(v);
+            return;
         }
         
-        for(int col = 0; col < n; col++){
-            if(isValid(A, row, col)){
-                A[row] = col;
-                dfs(ret, A, n, row+1);
-                // no need to pop(), replace directly
+        for(int i = 0; i < n; ++i){
+            if(isValid(rows, cur, i)){
+                rows[cur] = i;
+                dfs(rows, cur+1, n, ret, s);
             }
         }
     }
     
-    bool isValid(vector<int> &A, int row, int col){
-        for(int i = 0; i < row; i++){ // check all previous rows
-            if(A[i] == col) return false;
-            if(abs(row - i) == abs(A[i] - col)) return false;
+    bool isValid(vector<int> &rows, int cur, int val){
+        for(int i = 0; i < cur; ++i){
+            if(rows[i] == val || abs(cur - i) == abs(val - rows[i]))
+                return false;
         }
         return true;
     }

@@ -15,23 +15,20 @@ class Solution {
 public:
     // sort, then get the first, merge the remaining to the fisrt
     vector<Interval> merge(vector<Interval> &intervals) {
-        sort(intervals.begin(), intervals.end(), comparator);
+        sort(intervals.begin(), intervals.end(), cmp());
+        int n = intervals.size();
         vector<Interval> ret;
-        if(intervals.size() == 0) return ret;
+        if(n == 0) return ret;
+        
         Interval cur = intervals[0];
-        for(int i = 1; i < intervals.size(); i++){
-            
-            // no overlap
-            if(intervals[i].start > cur.end){
-                ret.push_back(cur);
-                cur = intervals[i];
+        for(int i = 1; i < n; ++i){
+            Interval tmp = intervals[i];
+            if(tmp.start <= cur.end){
+                cur.end = max(cur.end, tmp.end); 
             }
-            // overlap
             else{
-                int minstart = min(cur.start , intervals[i].start);
-                int maxend   = max(cur.end   , intervals[i].end);
-                cur.start = minstart;
-                cur.end   = maxend;
+                ret.push_back(cur);
+                cur = tmp;
             }
         }
         ret.push_back(cur);

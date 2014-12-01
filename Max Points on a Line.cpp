@@ -11,32 +11,28 @@ class Solution {
 public:
     // y = kx + b
     int maxPoints(vector<Point> &points) {
-        if(points.size() == 0) return 0;
-        int maxnum = 0;
-        map<float, int> m; // <slope, count>
-        for(int i = 0; i < points.size(); i++){ // for each point, find a line with max points
-            int itself = 0;  // corner case 1
-            int infinite = 0; // corner case 2, vertical to x-axis
-            for(int j = 0; j < points.size(); j++){
-                int x = points[j].x - points[i].x;
-                int y = points[j].y - points[i].y;
-             
-                if(x == 0 && y == 0) { itself++; }
-                else if(x == 0) { infinite++; }
-                else{
-                    float k = (float)y / x;
-                    if(!m[k]) m[k] = 1;
-                    else m[k]++;
-                }
+        int max_num = 0;
+        
+        for(Point p : points){
+            
+            int itself = 0;
+            int vertical = 0;
+            map<double, int> m;
+            for(Point q : points){
+                if(q.x == p.x && q.y == p.y) { itself++; continue; }
+                if(q.x == p.x) { vertical++; continue; }
+                
+                double k = (double)(q.y - p.y) / (q.x - p.x);
+                m[k]++;
             }
-            int tmp = 0;
-            for(auto it = m.begin(); it != m.end(); ++it){   // used for loop, bug happened here
-                tmp = max(tmp, it->second);
-            }
-            maxnum = max(maxnum, tmp + itself);
-            maxnum = max(maxnum, infinite + itself);
-            m.clear();
+            
+            max_num = max(max_num, itself + vertical);
+            int max_tmp = 0;
+            for(auto it = m.begin(); it != m.end(); ++it)
+                max_tmp = max(max_tmp, it->second);
+            max_num = max(max_num, itself + max_tmp);
         }
-        return maxnum;
+        
+        return max_num;
     }
 };
