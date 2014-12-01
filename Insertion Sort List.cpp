@@ -11,16 +11,18 @@ public:
     // maintain a sorted linked list 
     ListNode *insertionSortList(ListNode *head) {
         ListNode *dummy = new ListNode(0);
-        while(head != NULL){
-            ListNode *node = dummy;
-            while(node->next != NULL && node->next->val < head->val){
-                node = node->next;
+        while(head){
+            ListNode *cur = dummy;
+            while(cur->next && cur->next->val < head->val){
+                cur = cur->next;
             }
             ListNode *nt = head->next;
-            head->next = node->next;
-            node->next = head;
+            head->next = cur->next;
+            cur->next = head;
             head = nt;
         }
-        return dummy->next;
+        ListNode *ret = dummy->next;
+        delete(dummy);
+        return ret;
     }
 };

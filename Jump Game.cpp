@@ -2,13 +2,12 @@ class Solution {
 public:
     // jump as far as you can
     bool canJump(int A[], int n) {
-        int canJumpMaxDist = 0;
-    
+        if(n == 0) return true;
+        int max_dist = A[0];
         for(int i = 0; i < n; i++){
-            canJumpMaxDist = max(canJumpMaxDist, i + A[i]);
-            if(canJumpMaxDist == i) // can't go to the next position
-                break;
+            if(max_dist < i) return false;
+            max_dist = max(max_dist, i + A[i]);
         }
-        return canJumpMaxDist >= n-1 ? true : false;
+        return true;
     }
 };

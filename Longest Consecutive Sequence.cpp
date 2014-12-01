@@ -2,27 +2,28 @@ class Solution {
 public:
     // set, erase
     int longestConsecutive(vector<int> &num) {
-        int maxlen = 0;
-        unordered_set<int> myset; // point: unsorted_set for O(1) look up
-        for(int i = 0; i < num.size(); i++)
-            myset.insert(num[i]);
-        for(auto it = myset.begin(); it != myset.end(); ++it){ // point: auto
+        unordered_set<int> m;
+        for(int i : num)
+            m.insert(i);
+        int max_len = 0;
+        for(auto it = m.begin(); it != m.end(); ++it){
             int count = 1;
             int left = *it - 1;
             int right = *it + 1;
-            // myset.erase(*it); can't earse iterator?
-            while(myset.find(left) != myset.end()){ // find in O(1)
+            
+            while(m.find(left) != m.end()){
                 count++;
-                myset.erase(left);
+                m.erase(left);
                 left--;
             }
-            while(myset.find(right) != myset.end()){
+            
+            while(m.find(right) != m.end()){
                 count++;
-                myset.erase(right);
+                m.erase(right);
                 right++;
             }
-            maxlen = max(maxlen, count);
+            max_len = max(max_len, count);
         }
-        return maxlen;
+        return max_len;
     }
 };

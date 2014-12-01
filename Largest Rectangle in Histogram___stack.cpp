@@ -7,24 +7,26 @@ public:
     // maintain a stack of index of increasing height, so the left shorter is the lower element is the stack, once we meet its right shorter
     // then we can get the area of that height.
     int largestRectangleArea(vector<int> &height) {
-        height.push_back(0); // when all increasing in the stack, need to pop all elements at the end
-        stack<int> stk; // store index for left shorter, we can get height through its index.
-        int maxArea = 0;
+        int n = height.size();
+        if(n == 0) return 0;
+        stack<int> stk; // index
+        
+        int max_area = 0;
+        height.push_back(0); // point, when stack is 1,2,3,4,5, use 0 to pop all.
         int i = 0;
-        while(i < height.size()){ 
+        while(i <= n){
             if(stk.empty() || height[i] >= height[stk.top()]){
                 stk.push(i);
                 i++;
             }
-            // find right shorter, then calculate area for this height
-            else{ 
-                int cur = stk.top();
+            else{
+                int index = stk.top();
                 stk.pop();
-                int width = stk.empty() ? i : i - stk.top() - 1; // when stack is empty, it means no left shorter, all others are taller.
-                int area = height[cur] * width;
-                maxArea = max(maxArea, area);
+                int h = height[index];
+                int w = stk.empty() ? i : i-1-stk.top();
+                max_area = max(max_area, h*w);
             }
         }
-        return maxArea;
+        return max_area;
     }
 };

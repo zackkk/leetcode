@@ -2,26 +2,22 @@ class Solution {
 public:
     // stack
     int longestValidParentheses(string s) {
-        int maxlen = 0;
-        stack<int> stk; // save '(' index
-        int lastValidEnd = -1;
-        for(int i = 0; i < s.size(); i++){
-            if(s[i] == '('){
-                stk.push(i);
-            }
-            else{
-                if(stk.empty()){ // no valid matching
-                    lastValidEnd = i;
-                }
+        int max_len = 0;
+        int last_close = -1;
+        stack<int> stk;
+        for(int i = 0; i < s.size(); ++i){
+            if(s[i] == '(') stk.push(i);
+            else{ // try to match
+                if(stk.empty()) last_close = i; // no match
                 else{
-                    stk.pop();   // matched
-                    if(!st.empty())
-                        maxlen = max(maxlen, i - stk.top());             // keep matching, "(()"
+                    stk.pop();
+                    if(!stk.empty()) 
+                        max_len = max(max_len, i - stk.top());
                     else
-                        maxlen = max(maxlen, i - lastValidEnd);          // match the last one, ")()"
+                        max_len = max(max_len, i - last_close);
                 }
             }
         }
-        return maxlen; 
+        return max_len;
     }
 };

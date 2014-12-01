@@ -2,31 +2,27 @@ class Solution {
 public:
     // Lucy Can't Drink Milk
     string intToRoman(int num) {
-        map<int, string> myMap;
-        myMap[1] = "I";
-        myMap[4] = "IV";
-        myMap[5] = "V";
-        myMap[9] = "IX";
-        myMap[10] = "X";
-        myMap[40] = "XL";
-        myMap[50] = "L";
-        myMap[90] = "XC";
-        myMap[100] = "C";
-        myMap[400] = "CD";
-        myMap[500] = "D";
-        myMap[900] = "CM"; 
-        myMap[1000] = "M";
+        map<int, string> m;
+        m[1000] = "M";
+        m[900] = "CM";
+        m[500] = "D";
+        m[400] = "CD";
+        m[100] = "C";
+        m[90] = "XC";
+        m[50] = "L";
+        m[40] = "XL";
+        m[10] = "X";
+        m[9] = "IX";
+        m[5] = "V";
+        m[4] = "IV";
+        m[1] = "I";
         
-        int myArray[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        int arr[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         string ret = "";
-        int i = 0;
-        while(num > 0){
-            int times = num / myArray[i];
-            num = num % myArray[i];
-            for(int j = 0; j < times; j++){
-                ret += myMap[myArray[i]];
-            }
-            i++;
+        for(int i = 0; i < 13; ++i){
+            int times = num / arr[i];
+            num %= arr[i];
+            for(int j = 0; j < times; ++j) ret += m[arr[i]];
         }
         return ret;
     }

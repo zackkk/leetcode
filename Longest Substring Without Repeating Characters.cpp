@@ -5,29 +5,25 @@ public:
     // move slow to get rid of repeat: a b [c d e f b ...] ---> continue to move fast
     // how to prove the correctness? IDK!!!
     int lengthOfLongestSubstring(string s) {
-        if(s.size() == 0) return 0;
-        int maxLen = INT_MIN;
         unordered_set<char> myset;
+        int n = s.size();
+        
         int slow = 0;
-        int fast = 0;
-        while(fast < s.size()){
-            
-            // no repeating chars
-            if(myset.find(s[fast]) == myset.end()){
-                myset.insert(s[fast]);
+        int max_len = 0;
+        for(int i = 0; i < n; ++i){
+            if(myset.find(s[i]) == myset.end()){
+                myset.insert(s[i]);
             }
-            // has repeating char
             else{
-                maxLen = max(maxLen, fast - slow);
-                while(s[slow] != s[fast]){
+                max_len = max(max_len, i - slow);
+                while(s[slow] != s[i]){
                     myset.erase(s[slow]);
                     slow++;
-                }   
+                }
                 slow++;
             }
-            fast++;
         }
-        maxLen = max(maxLen, fast - slow);
-        return maxLen;
+        max_len = max(max_len, n - slow);
+        return max_len;
     }
 };

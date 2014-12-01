@@ -1,66 +1,79 @@
 // put LRU at the head, remove the first element when the cache is full. move the used element to the end. 
 // hashmap + doubly linked list
-struct Node{ 
-    Node *prev;
-    Node *next;
-    int key;
+struct node{
+    int key; // map erase by key
     int val;
-    Node(int k, int v) : key(k), val(v), prev(NULL), next(NULL) {} 
+    node *prev;
+    node *next;
+    node(int k, int v) : key(k), val(v), prev(NULL), next(NULL) {}
 };
 
+// tried once then AC, :)
 class LRUCache{
 private:
-    int capacity;    
-    map<int, Node*> m;
-    Node *head;
-    Node *tail;
-
+    map<int, node*> m;
+    map<int, node*>::iterator it;
+    int size;
+    int capacity;
+    node *head;
+    node *tail;
+    
+    
 public:
     LRUCache(int capacity) {
         this->capacity = capacity;
-        head = new Node(-1, -1);
-        tail = new Node(-1, -1);
+        size = 0;
+        head = new node(-1, -1);
+        tail = new node(-1, -1);
         head->next = tail;
         tail->prev = head;
     }
     
+    void moveToHead(node *n){
+        node *tmp = head->next;
+        head->next = n;
+        n->prev = head;
+        n->next = tmp;
+        tmp->prev = n;
+    }
+    
+    void extractNode(node *n){
+        n->prev->next = n->next;
+        n->next->prev = n->prev;
+        n->prev = NULL;
+        n->next = NULL;
+    }
+    
     int get(int key) {
-        if(m.find(key) == m.end()) {
+        it = m.find(key);
+        if(it == m.end())
             return -1;
+        else{
+            extractNode(it->second);
+            moveToHead(it->second);
+            return it->second->val;
         }
-        
-        // update cache
-        Node *current = m[key];
-        current->prev->next = current->next;
-        current->next->prev = current->prev;
-        MoveToTail(current);
-        
-        return m[key]->val;
     }
     
     void set(int key, int value) {
-        // if key exists, update value
-        if(get(key) != -1){ // updated linked list in "get"
-            m[key]->val = value;
-            return;
+        it = m.find(key);
+        if(it == m.end()){
+            node *tmp = new node(key, value);
+            moveToHead(tmp);
+            m[key] = tmp;
+            size++;
+            if(size > capacity){
+                node *toDel = tail->prev;
+                extractNode(toDel);
+                m.erase(toDel->key);
+                delete(toDel);
+                size--;
+            }
         }
-        // discard LRU is full, discard the first element
-        if(m.size() == capacity){
-            Node *first = head->next;
-            head->next = head->next->next;
-            head->next->prev = head;
-            m.erase(first->key); // bug happened here
-        }    
-        // insert new 
-        Node *newNode = new Node(key, value);
-        m[key] = newNode;
-        MoveToTail(newNode);
-    }
-    
-    void MoveToTail(Node *curNode){
-        tail->prev->next = curNode;
-        curNode->prev = tail->prev;
-        tail->prev = curNode;
-        curNode->next = tail;
+        else{
+            extractNode(it->second);
+            moveToHead(it->second);
+            it->second->val = value;
+        }
     }
 };
