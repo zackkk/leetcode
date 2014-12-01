@@ -4,31 +4,30 @@ public:
     // left[i]: max profit from first day to day i (global) for one transaction
     // right[i]: max profit from day i to last day (global) for one transaction
     int maxProfit(vector<int> &prices) {
-        int len = prices.size();
-        if(len <= 1) return 0;
+        int n = prices.size();
+        if(n == 0) return 0;
         
-        vector<int> left (len, 0);
-        vector<int> right (len, 0);
-        
-        // dp from left to right
-        left[0] = 0; // no trade no money
-        int low = prices[0];
-        for(int i = 1; i < len; i++){
-            left[i] = max(left[i-1], prices[i] - low); // global max vs local max
-            low = min(low, prices[i]);
+        vector<int> left (n, 0);
+        int left_max = 0;
+        int left_low = prices[0];
+        for(int i = 1; i < n; ++i){
+            left[i] = max(left_max, prices[i] - left_low);
+            left_max = max(left_max, left[i]);
+            left_low = min(left_low, prices[i]);
         }
         
-        // dp from right to left
-        right[len-1] = 0;
-        int high = prices[len-1];
-        for(int i = len-2; i >= 0; i--){
-            right[i] = max(right[i+1], high - prices[i]); // global max vs local max
-            high = max(high, prices[i]);
+        vector<int> right (n, 0);
+        int right_max = 0;
+        int right_high = prices[n-1];
+        for(int i = n - 2; i >= 0; --i){
+            right[i] = max(right_max, right_high - prices[i]);
+            right_max = max(right_max, right[i]);
+            right_high = max(right_high, prices[i]);
         }
         
-        int maxprofit = 0;
-        for(int i = 0; i < len; i++)
-            maxprofit = max(maxprofit, left[i] + right[i]);
-        return maxprofit;
+        int ret = 0;
+        for(int i = 0; i < n; ++i)
+            ret = max(ret, left[i] + right[i]);
+        return ret;
     }
 };

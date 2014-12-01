@@ -8,31 +8,27 @@
  */
 class Solution {
 public:
-    // straight forward implementation
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        ListNode *dummy = new ListNode(0);
+        ListNode *dummy = new ListNode(-1);
         ListNode *prev = dummy;
         
         int carry = 0;
-        while(l1 != NULL || l2 != NULL){
+        while(l1 || l2){
             int sum = carry;
-            if(l1 != NULL){
-                sum += l1->val;
-                l1 = l1->next;
-            }
-            if(l2 != NULL){
-                sum += l2->val;
-                l2 = l2->next;
-            }
+            if(l1) { sum += l1->val; l1 = l1->next; }
+            if(l2) { sum += l2->val; l2 = l2->next; }
+            ListNode *tmp = new ListNode(sum % 10);
             carry = sum / 10;
-            ListNode *cur = new ListNode(sum % 10);
-            prev->next = cur;
-            prev = cur;
+            prev->next = tmp;
+            prev = tmp;
         }
-        if(carry != 0){
-            ListNode *cur = new ListNode(carry);
-            prev->next = cur;
+        if(carry){
+            ListNode *tmp = new ListNode(carry);
+            prev->next = tmp;
         }
-        return dummy->next;
+        
+        ListNode *ret = dummy->next;
+        delete(dummy);
+        return ret;
     }
 };

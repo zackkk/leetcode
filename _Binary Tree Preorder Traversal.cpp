@@ -9,24 +9,23 @@
  */
 class Solution {
 public:
-    // stack, continue traversing left, turn to the right 
     vector<int> preorderTraversal(TreeNode *root) {
         vector<int> ret;
-        stack<TreeNode *> stk;
+        stack<TreeNode*> stk;
         TreeNode *cur = root;
         
-        while(cur != NULL || !stk.empty()){
-            while(cur != NULL){
+        while(cur || !stk.empty()){
+            while(cur){
                 ret.push_back(cur->val);
                 stk.push(cur);
                 cur = cur->left;
             }
             if(!stk.empty()){
-                cur = stk.top();
+                TreeNode *tmp = stk.top();
                 stk.pop();
-                cur = cur->right;
+                cur = tmp->right;
             }
         }
         return ret;
-    }
+    } 
 };

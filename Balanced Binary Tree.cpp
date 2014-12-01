@@ -9,18 +9,17 @@
  */
 class Solution {
 public:
-    // post-order traverse & the usage of -1, use return value to avoid duplicate calculation. traverse once only
     bool isBalanced(TreeNode *root) {
-        return getDepth(root) != -1;
+        return maxDepth(root, 0) != -1;
     }
-    int getDepth(TreeNode *root){
-        if(root == NULL) return 0;
-        
-        int left = getDepth(root->left);
-        int right = getDepth(root->right);
-        if(left == -1 || right == -1 || abs(left - right) > 1)
+    
+    int maxDepth(TreeNode *root, int depth){
+        if(root == NULL) return depth;
+        int left_depth = maxDepth(root->left, depth + 1);
+        int right_depth = maxDepth(root->right, depth + 1);
+        if(left_depth == -1 || right_depth == -1 || abs(left_depth - right_depth) > 1) 
             return -1;
-        else
-            return max(left, right) + 1;
+        else 
+            return max(left_depth, right_depth);
     }
 };

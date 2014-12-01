@@ -1,21 +1,18 @@
 class Solution {
 public:
-    // adjacency matrix
-    vector<string> anagrams(vector<string> &strs) { 
+    vector<string> anagrams(vector<string> &strs) {
+        map<string, vector<string>> m;
         
-        map<string, vector<string>> myMap;
-        for(int i = 0; i < strs.size(); i++){
-            string key = strs[i];
+        for(string str : strs){
+            string key = str;
             sort(key.begin(), key.end());
-            myMap[key].push_back(strs[i]);
+            m[key].push_back(str);
         }
         
-        // map: iterator->first, iterator->second; auto: map<string, vector<string>>::iterator
         vector<string> ret;
-        for(auto it = myMap.begin(); it != myMap.end(); ++it){
-            if(it->second.size() > 1){
+        for(auto it = m.begin(); it != m.end(); ++it){
+            if((it->second).size() > 1)
                 ret.insert(ret.end(), it->second.begin(), it->second.end());
-            }
         }
         return ret;
     }

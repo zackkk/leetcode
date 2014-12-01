@@ -9,28 +9,31 @@
  */
 class Solution {
 public:
-    // bfs
     vector<vector<int> > levelOrderBottom(TreeNode *root) {
-        vector<vector<int>> ret;
-        if(NULL == root) return ret;
-        queue<TreeNode *> q;
-        q.push(root);
-        while(!q.empty()){
-            queue<TreeNode *> q_next;
-            vector<int> vec;
-            // save current level and get the next level
-            while(!q.empty()){
-                TreeNode *tn = q.front();
-                q.pop();
-                vec.push_back(tn->val);
-                if(tn->left)  q_next.push(tn->left); // can't push NULL
-                if(tn->right) q_next.push(tn->right);
+        vector<vector<int> > ret;
+        if(root == NULL) return ret;
+        
+        queue<TreeNode*> cur_q;
+        cur_q.push(root);
+        
+        while(!cur_q.empty()){
+            queue<TreeNode*> nt_q;
+            vector<int> v;
+            
+            while(!cur_q.empty()){
+                TreeNode *tmp = cur_q.front();
+                cur_q.pop();
+                v.push_back(tmp->val);
+                
+                if(tmp->left) nt_q.push(tmp->left);
+                if(tmp->right) nt_q.push(tmp->right);
             }
-            ret.push_back(vec);
-            q = q_next;
+            
+            cur_q = nt_q;
+            ret.push_back(v);
         }
-    
-        reverse(ret.begin(), ret.end()); // use STL
+        
+        reverse(ret.begin(), ret.end());
         return ret;
     }
 };

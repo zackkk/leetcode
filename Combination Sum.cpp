@@ -1,26 +1,24 @@
 class Solution {
 public:
-    // dfs
     vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
-        vector<vector<int> > ret;
-        if(candidates.size() == 0) return ret;
-        vector<int> vec;
         sort(candidates.begin(), candidates.end());
-        helper(ret, vec, candidates, target, 0, 0);
+        vector<int> v;
+        vector<vector<int>> ret;
+        dfs(candidates, target, v, ret, 0, 0);
         return ret;
     }
     
-    void helper(vector<vector<int>> &ret, vector<int> vec, vector<int> &candidates, int target, int sum, int cur){
+    void dfs(vector<int> &candidates, int target, vector<int> &v, vector<vector<int>> &ret, int sum, int cur){
         if(sum == target){
-            ret.push_back(vec);
+            ret.push_back(v);
             return;
         }
-        for(int i = cur; i < candidates.size(); i++){
-            if(sum + candidates[i] <= target){
-                vec.push_back(candidates[i]);
-                helper(ret, vec, candidates, target, sum+candidates[i], i);
-                vec.pop_back();
-            }
+        
+        for(int i = cur; i < candidates.size(); ++i){
+            if(sum + candidates[i] > target) continue;
+            v.push_back(candidates[i]);
+            dfs(candidates, target, v, ret, sum+candidates[i], i);
+            v.pop_back();
         }
     }
 };

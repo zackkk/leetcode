@@ -8,26 +8,22 @@
  */
 class Solution {
 public:
-    // deep copy, map old to new
+    // map old to new
     RandomListNode *copyRandomList(RandomListNode *head) {
-        map<RandomListNode *, RandomListNode *> mapOldToNew;
-        
-        // copy nodes
+        map<RandomListNode*, RandomListNode*> m;
         RandomListNode *cur = head;
-        while(cur != NULL){
-            RandomListNode *newNode = new RandomListNode(cur->label); 
-            mapOldToNew[cur] = newNode;
+        while(cur){
+            RandomListNode *tmp = new RandomListNode(cur->label);
+            m[cur] = tmp;
             cur = cur->next;
         }
         
-        // copy connections
         cur = head;
-        while(cur != NULL){
-            mapOldToNew[cur]->next = mapOldToNew[cur->next];
-            mapOldToNew[cur]->random = mapOldToNew[cur->random];
+        while(cur){
+            m[cur]->next = m[cur->next];
+            m[cur]->random = m[cur->random];
             cur = cur->next;
         }
-        
-        return mapOldToNew[head];
+        return m[head];
     }
 };
