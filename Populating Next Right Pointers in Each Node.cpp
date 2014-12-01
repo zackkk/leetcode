@@ -9,16 +9,17 @@
 class Solution {
 public:
     // assign connections for the next level
-    void connect(TreeLinkNode *root) {
-        if(root == NULL || root->left == NULL)
-            return;
+    if(root == NULL) return;
         
-        TreeLinkNode *traverse = root;
-        while(traverse != NULL){
-            traverse->left->next  = traverse->right;
-            traverse->right->next = traverse->next != NULL ? traverse->next->left : NULL;
-            traverse = traverse->next;
-        } 
-        connect(root->left);
+        TreeLinkNode *cur = root;
+        while(cur->left){
+            TreeLinkNode *traverser = cur;
+            while(traverser){
+                traverser->left->next = traverser->right;
+                traverser->right->next = traverser->next ? traverser->next->left : NULL;
+                traverser = traverser->next; 
+            }
+            cur = cur->left;
+        }
     }
 };

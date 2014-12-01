@@ -11,33 +11,35 @@ public:
     // 1. check if we need to reverse
     // 2. reverse using prev trick
     ListNode *reverseKGroup(ListNode *head, int k) {
-        if(k <= 1) return head;
         ListNode *dummy = new ListNode(-1);
         dummy->next = head;
-        ListNode *prev = dummy;
-        ListNode *cur = head; // cur will move "automatically"
         
-        while(cur != NULL){
+        ListNode *prev = dummy;
+        ListNode *cur = head;
+        while(true){
+            if(listLength(cur) < k) break;
             
-            // check if we need to reverse
-            int count = 1;
-            ListNode *it = cur;
-            while(it->next != NULL){ count++; it = it->next; } 
-            if(count < k) break;
-            
-            // need to reverse
-            count = 1;
-            while(count < k){
+            ListNode *prev_future = cur;
+            for(int i = 0; i < k; ++i){
                 ListNode *nt = cur->next;
-                cur->next = nt->next;
-                nt->next = prev->next;
-                prev->next = nt;
-                
-                count++;
+                ListNode *prev_nt = prev->next;
+                prev->next = cur;
+                cur->next = prev_nt;   
+                cur = nt;   
             }
-            prev = cur;
-            cur = cur->next;
+            prev_future->next = cur;
+            prev = prev_future;
         }
-        return dummy->next;
+        
+        ListNode *ret = dummy->next;
+        delete(dummy);
+        return ret;
+    }
+    
+    
+    int listLength(ListNode *h){
+        int i = 0;
+        while(h){ i++; h = h->next; }
+        return i;
     }
 };

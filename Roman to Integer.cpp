@@ -2,29 +2,33 @@ class Solution {
 public:
      // Lucy Can't Drink Milk
     int romanToInt(string s) {
-        map<char,int> myMap;
-        myMap['I'] = 1;
-        myMap['V'] = 5;
-        myMap['X'] = 10;
-        myMap['L'] = 50;
-        myMap['C'] = 100;
-        myMap['D'] = 500;
-        myMap['M'] = 1000;
+        map<char, int> m;
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
         
         int ret = 0;
-        for(int i = 0; i < s.length(); i++){
-            if(i+1 < s.length() && ((s[i] == 'I' && s[i+1] == 'V') ||
-                                    (s[i] == 'I' && s[i+1] == 'X') || 
-                                    (s[i] == 'X' && s[i+1] == 'L') || 
-                                    (s[i] == 'X' && s[i+1] == 'C') || 
-                                    (s[i] == 'C' && s[i+1] == 'D') || 
-                                    (s[i] == 'C' && s[i+1] == 'M'))
-              ){
-                ret += (myMap[s[i+1]] - myMap[s[i]]);
-                i++;
+        int i = 0;
+        while(i < s.size()){
+            if(i + 1 < s.size() &&
+                  ((s[i] == 'I' && s[i+1] == 'V') ||
+                   (s[i] == 'I' && s[i+1] == 'X') ||
+                   (s[i] == 'X' && s[i+1] == 'L') ||
+                   (s[i] == 'X' && s[i+1] == 'C') ||
+                   (s[i] == 'C' && s[i+1] == 'D') ||
+                   (s[i] == 'C' && s[i+1] == 'M')) ){
+                       
+                    ret += m[s[i+1]] - m[s[i]];
+                    i += 2;
+                   
             }
             else{
-                ret += myMap[s[i]];
+                ret += m[s[i]];
+                i++;
             }
         }
         return ret;

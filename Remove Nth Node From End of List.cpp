@@ -10,25 +10,15 @@ class Solution {
 public:
     // slow & fast "pointers"
     ListNode *removeNthFromEnd(ListNode *head, int n) {
-        // n will always be valid
+        if(head == NULL) return NULL;
         ListNode *slow = head;
         ListNode *fast = head;
+        while(n > 0) { fast = fast->next; n--; }
     
-        while(n > 0){
-            fast = fast->next;
-            n--;
-        }
-        // corner case: remove the first element
-        if(fast == NULL)
-            return head->next;
-            
-        ListNode *prev = NULL;
-        while(fast != NULL){
-            prev = slow;
-            slow = slow->next;
-            fast = fast->next;
-        }
-        prev->next = prev->next->next;
+        if(!fast) { return head->next; } // special case
+    
+        while(fast->next) { slow = slow->next; fast = fast->next; }
+        slow->next = slow->next->next;
         return head;
     }
 };

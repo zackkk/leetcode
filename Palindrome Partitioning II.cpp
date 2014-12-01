@@ -1,20 +1,20 @@
 class Solution {
 public:
-    // 1d dp
+    // Palindrome Partitioning I: list all possible partitions
     int minCut(string s) {
-        int len = s.size();
-        vector<vector<bool>> p (len, vector<bool> (len, false)); // is palindrome
-        vector<int> dp (len, 0);
+        int n = s.size();
+        vector<vector<bool>> p (n, vector<bool>(n, false)); // is palindrome
+        vector<int> dp (n, 0);
         
-        for(int j = 0; j < len; j++){ 
+        for(int j = 0; j < n; ++j){
             dp[j] = j;
-            for(int i = 0; i <= j; i++){
-                if((j-i <= 1 || p[i+1][j-1]) && s[i] == s[j]) 
-                    p[i][j] = true; 
+            for(int i = 0; i <= j; ++i){
+                if(s[i] == s[j] && (j - i <= 1 || p[i+1][j-1]))
+                    p[i][j] = true;
                 if(p[i][j])
                     dp[j] = i == 0 ? 0 : min(dp[j], dp[i-1]+1);
             }
         }
-        return dp[len-1];
+        return dp[n-1];
     }
 };

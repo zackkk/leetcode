@@ -1,15 +1,17 @@
 class Solution {
 public:
-    // same as Palindrome Number
     int reverse(int x) {
-        int ret = 0;
+      
         int sign = x > 0 ? 1 : -1;
-        x *= sign; // absolute value
-        while(x != 0){
-            int rem = x % 10;
-            ret = ret * 10 + rem;
-            x = x / 10;
+        long long y = abs(x);
+        long long ret = 0;
+        
+        while(y != 0){
+            ret = ret * 10 + y % 10;
+            if(ret > INT_MAX || ret < INT_MIN) return 0;// new test cases
+            y /= 10;
         }
-        return sign * ret;
+
+        return (int)sign*ret;
     }
 };

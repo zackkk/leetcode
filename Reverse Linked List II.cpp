@@ -35,6 +35,6 @@ public:
             cur->next = nt_nt;
             nt->next = prev_nt;
         }
-        return dummy->next;
+        return dummy->next; // delete dummy
     }
 };

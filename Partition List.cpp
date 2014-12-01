@@ -8,32 +8,32 @@
  */
 class Solution {
 public:
-    // straight-forward implementation
     ListNode *partition(ListNode *head, int x) {
-        if(head == NULL) return NULL;
+        ListNode *dummy_a = new ListNode(-1); // less
+        ListNode *dummy_b = new ListNode(-1); // greater
+        ListNode *prev_a = dummy_a;
+        ListNode *prev_b = dummy_b;
         
-        ListNode *lessHead = new ListNode(-1);
-        ListNode *greaterHead = new ListNode(-1);
-        
-        ListNode *lessPrev = lessHead;
-        ListNode *greaterPrev = greaterHead;
-        
-        while(head != NULL){
-            ListNode *nt = head->next;
-            if(head->val < x){
-                lessPrev->next = head;
-                lessPrev = head;
-                lessPrev->next = NULL;
+        ListNode *cur = head;
+        while(cur){
+            ListNode *nt = cur->next;
+            if(cur->val < x){
+                prev_a->next = cur;
+                prev_a = cur;
             }
             else{
-                greaterPrev->next = head;
-                greaterPrev = head;
-                greaterPrev->next = NULL;
+                prev_b->next = cur;
+                prev_b = cur;
             }
-            head = nt;
+            cur->next = NULL; // where bug happens
+            cur = nt;
         }
         
-        lessPrev->next = greaterHead->next;
-        return lessHead->next;
+        prev_a->next = dummy_b->next;
+        
+        ListNode *ret = dummy_a->next;
+        delete(dummy_a);
+        delete(dummy_b);
+        return ret;
     }
 };

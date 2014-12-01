@@ -8,39 +8,28 @@
  */
 class Solution {
 public:
-    // adjust k, slow & fast pointers
     ListNode *rotateRight(ListNode *head, int k) {
+        if(!head || !head->next) return head;
+        k = k % listLength(head);
+        if(k == 0) return head;
+        
         ListNode *slow = head;
         ListNode *fast = head;
         
-        // adjust k
-        ListNode *cur = head;
-        if(getListLength(cur) == 0) return NULL;
-        k = k % getListLength(cur);
-        
-        // fast is k stpes ahead
-        while(k > 0){
-            fast = fast->next;
-            k--;
-        }
-        while(fast->next != NULL){
-            fast = fast->next;
+        while(k > 0) { fast = fast->next; k--;}
+        while(fast->next){
             slow = slow->next;
+            fast = fast->next;
         }
-        
-        // order matters, especially for case: {0}, 0
-        fast->next = head;
-        ListNode *dummy = slow->next;
+        ListNode *ret = slow->next;
         slow->next = NULL;
-        return dummy;
+        fast->next = head;
+        return ret;
     }
     
-    int getListLength(ListNode *ln){
-        int len = 0;
-        while(ln != NULL){
-            ln = ln->next;
-            len++;
-        }
-        return len;
+    int listLength(ListNode *l){
+        int i = 0;
+        while(l) { i++; l = l->next; }
+        return i;
     }
 };

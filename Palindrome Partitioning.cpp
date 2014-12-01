@@ -1,33 +1,34 @@
 class Solution {
 public:
-    // dfs
     vector<vector<string>> partition(string s) {
         vector<vector<string>> ret;
         if(s.size() == 0) return ret;
-        vector<string> vec;
-        dfs(ret, vec, s, 0);
+        vector<string> v;
+        dfs(s, ret, v, 0);
         return ret;
     }
     
-    void dfs(vector<vector<string>> &ret, vector<string> vec, string s, int start){
-        if(start == s.size()){ 
-            ret.push_back(vec);
+    void dfs(string s, vector<vector<string>> &ret, vector<string> &v, int cur){
+        if(cur == s.size()){
+            ret.push_back(v);
             return;
         }
-        for(int i = start; i < s.size(); i++){
-            if(isPalindrome(start, i, s)){
-                vec.push_back(s.substr(start, i-start+1));
-                dfs(ret, vec, s, i+1);
-                vec.pop_back();
+        
+        for(int i = cur; i < s.size(); ++i){
+            string tmp = s.substr(cur, i-cur+1);
+            if(isPalindrome(tmp)){
+                v.push_back(tmp);
+                dfs(s, ret, v, i+1);
+                v.pop_back();
             }
         }
     }
     
-    bool isPalindrome(int start, int end, string str){
-        while(start < end){
-            if(str[start] != str[end]) return false;
-            start++;
-            end--;
+    bool isPalindrome(string &s){
+        int i = 0;
+        int j = s.size() - 1;  // error if put in the "for"
+        for( ; i < j; ++i, --j){
+            if(s[i] != s[j]) return false;
         }
         return true;
     }

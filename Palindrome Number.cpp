@@ -1,16 +1,12 @@
 class Solution {
 public:
-    // similar to Reverse Integer
     bool isPalindrome(int x) {
-        if(x < 0) return false;
-        return x == reverse(x);
-    }
-    int reverse(int x){
-        int ret = 0;
-        while(x != 0){
-            ret = ret * 10 + x % 10;
-            x = x / 10;
+        int tmp = x;
+        int y = 0;
+        while(tmp > 0){
+            y = y * 10 + tmp % 10;
+            tmp /= 10;
         }
-        return ret;
+        return y == x;
     }
 };
