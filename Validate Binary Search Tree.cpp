@@ -11,13 +11,13 @@ class Solution {
 public:
     // CC150
     bool isValidBST(TreeNode *root) {
-        return helper(root, INT_MIN, INT_MAX);
+        return helper(root, LLONG_MIN, LLONG_MAX);
     }
     
-    bool helper(TreeNode *root, int lowerBound, int upperBound){
+    bool helper(TreeNode *root, long long lo, long long hi){
         if(root == NULL) return true;
-        if(root->val <= lowerBound || root->val >= upperBound) return false;
-        return helper(root->left, lowerBound, root->val) &&
-               helper(root->right, root->val, upperBound);
+        if(root->val <= lo || root->val >= hi) return false;
+        
+        return helper(root->left, lo, root->val) && helper(root->right, root->val, hi);
     }
 };

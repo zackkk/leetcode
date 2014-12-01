@@ -1,18 +1,17 @@
 class Solution {
 public:
-    // solution 1: sort, left & right pointers: O(NlogN + N) ---> sort value will mess up index
-    // solution 2: map: O(NlogN) 
     vector<int> twoSum(vector<int> &numbers, int target) {
-        vector<int> ret;
-        map<int, int> m; // <value, index>
-        for(int i = 0; i < numbers.size(); i++){
-            if(m[target - numbers[i]]){
-                ret.push_back(m[target - numbers[i]]);
-                ret.push_back(i+1); // not zero-based.
-                break;
+        vector<int> ret (2, -1);
+        map<int, int> m; // num, index
+        for(int i = 0; i < numbers.size(); ++i){
+            int num = numbers[i];
+            if(m[target - num]){
+                ret[0] = m[target - num]; 
+                ret[1] = i + 1;
+                return ret;
             }
             else{
-                m[numbers[i]] = i+1; // not zero-based.
+                m[num] = i + 1; // "1" based
             }
         }
         return ret;
