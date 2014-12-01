@@ -1,36 +1,26 @@
 class Solution {
 public:
-    // stack
     int evalRPN(vector<string> &tokens) {
         if(tokens.size() == 0) return 0;
         stack<string> stk;
-        for(int i = 0; i < tokens.size(); i++){
-            if(!isOperator(tokens[i])){
-                stk.push(tokens[i]);
-            }
+        for(string token : tokens){
+            if(!isOperator(token))
+                stk.push(token);
             else{
-                string num1 = stk.top(); 
+                int num1 = stoi(stk.top());
                 stk.pop();
-                string num2 = stk.top();
+                int num2 = stoi(stk.top());
                 stk.pop();
-                string sum = "";
-                if (tokens[i] == "+")
-                    sum += to_string(stoi(num2) + stoi(num1));
-                else if (tokens[i] == "-")
-                    sum += to_string(stoi(num2) - stoi(num1));
-                else if (tokens[i] == "*")
-                    sum += to_string(stoi(num2) * stoi(num1));
-                else
-                    sum += to_string(stoi(num2) / stoi(num1));
-                stk.push(sum);
+                if(token == "+") stk.push(to_string(num2 + num1));
+                if(token == "-") stk.push(to_string(num2 - num1));
+                if(token == "*") stk.push(to_string(num2 * num1));
+                if(token == "/") stk.push(to_string(num2 / num1));
             }
         }
-        string sum = stk.top();
-        stk.pop();
-        return stoi(sum);
+        return stoi(stk.top());
     }
     
-    bool isOperator(string s){
-        return (s == "+" || s == "-" || s == "*" || s == "/");
+    bool isOperator(string str){
+        return (str == "+" || str == "-" || str == "*" || str == "/"); 
     }
 };

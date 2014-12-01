@@ -8,19 +8,20 @@
  * };
  */
 class Solution {
-TreeNode *prev = new TreeNode(-1);
+private:
+    TreeNode *prev = NULL;
 public:
-    // pre-order & prev pointer
     void flatten(TreeNode *root) {
-        if(root == NULL) return;
+        if(!root) return;
         
-        prev->right = root;
-        prev->left = NULL;
+        if(prev){
+            prev->left = NULL;
+            prev->right = root;
+        }
         prev = root;
         
-        // connect by prev 
-        TreeNode *rightTree = root->right;
+        TreeNode *right_child = root->right;
         flatten(root->left);
-        flatten(rightTree);
+        flatten(right_child);
     }
 };

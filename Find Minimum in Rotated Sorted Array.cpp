@@ -1,23 +1,23 @@
 class Solution {
 public:
-    // binary search 
-    // only the min smaller than its previous element
+    // min: smaller than its previous element, will not in the sorted side
     int findMin(vector<int> &num) {
-        return binarySearch(num, 0, num.size()-1);
+        int lo = 0;
+        int hi = num.size()-1;
+        while(true){
+            if(lo > hi) return num[0];
+            if(lo == hi) return num[lo];
+            
+            int mi = lo + (hi - lo) / 2;
+            
+            if(lo < mi && num[mi] < num[mi-1]) return num[mi];
+            if(mi < hi && num[mi+1] < num[mi]) return num[mi+1];
+            
+            if(num[mi] < num[hi])
+                hi = mi - 1;
+            else
+                lo = mi + 1;
+        }
+        return num[lo];
     }
-    
-    int binarySearch(vector<int> &num, int low, int high){
-        if(low > high) return num[0]; // already sorted
-        if(low == high) return num[low]; // onle one element left
-        
-        int mid = (low + high) / 2;
-        // use mid to check the "smaller" property
-        if(low < mid && num[mid] < num[mid-1]) return num[mid];
-        if(mid < high && num[mid+1] < num[mid]) return num[mid+1];
-        
-        if(num[mid] < num[high]) 
-            return binarySearch(num, low, mid-1);
-        else
-            return binarySearch(num, mid+1, high);
-    } 
 };

@@ -1,29 +1,26 @@
 class Solution {
 public:
-    // trick: store "gap", then check if it can fill later
+    // trick: store "gap", then check if it can be filled later
     int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
-        int len = gas.size();
-        vector<int> left;
-        int leftSum = 0;
-        for(int i = 0; i < len; i++){
-            left.push_back(gas[i] - cost[i]);
-            leftSum += left[i];
+        int n = gas.size();
+        vector<int> rem (n, 0);
+        int rem_total = 0;
+        for(int i = 0; i < n; ++i){
+            rem[i] = gas[i] - cost[i];
+            rem_total += rem[i];
         }
-        // canCompletePoint doesn't exist
-        if(leftSum < 0) 
-            return -1;    
         
-        // canCompletePoint exist
-        int canCompletePointSum = 0;
-        int canCompletePoint = 0;
-        for(int i = 0; i < len; i++){
-            canCompletePointSum += left[i];
-            // current canCompletePoint is not working, update it
-            if(canCompletePointSum < 0){ 
-                canCompletePointSum = 0;
-                canCompletePoint = i+1;
+        if(rem_total < 0) return -1;
+        
+        int ret = 0;
+        rem_total = 0;
+        for(int i = 0; i < n; ++i){
+            rem_total += rem[i];
+            if(rem_total < 0){
+                rem_total = 0;
+                ret = i+1;
             }
         }
-        return canCompletePoint;
+        return ret;
     }
 };

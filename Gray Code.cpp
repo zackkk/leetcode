@@ -4,19 +4,18 @@ public:
     // 00, 01,, 11, 10
     // 00, 01,  11, 10 ,, 110, 111, 101, 100
     vector<int> grayCode(int n) {
-        vector<int> ret;
-        ret.push_back(0);
-        if(n == 0) return ret;
-        ret.push_back(1);
-        if(n == 1) return ret;
-        
+        vector<int> prev;
+        prev.push_back(0);
+        if(n <= 0) return prev;
+        prev.push_back(1);
         int power = 1;
-        for(int i = 2; i <= n; i++){
+        for(int i = 2; i <= n; ++i){
             power *= 2;
-            vector<int> tmp = ret;
-            for(int j = ret.size()-1; j >= 0; j--)
-                ret.push_back(tmp[j] + power);
+            vector<int> cur = prev;
+            for(int j = prev.size()-1; j >= 0; --j)
+                cur.push_back(prev[j] + power);
+            prev = cur;
         }
-        return ret;
+        return prev;
     }
 };

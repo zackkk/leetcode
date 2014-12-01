@@ -4,23 +4,22 @@ public:
         return binarySearch(num, 0, num.size()-1);
     }
     
-    int binarySearch(vector<int> &num, int low, int high){
-        if(low > high) return num[0]; // already sorted
-        if(low == high) return num[low]; // onle one element left
-        
-        int mid = (low + high) / 2;
-    
-        // use mid to check the "smaller" property
-        if(low < mid && num[mid] < num[mid-1]) return num[mid];    
-        if(mid < high && num[mid+1] < num[mid]) return num[mid+1];
-        
-        // handle duplicates cases
-        if(num[low] == num[mid] || num[high] == num[mid])
-            return min(binarySearch(num, low, mid-1), binarySearch(num, mid+1, high));
+    int binarySearch(vector<int> &num, int lo, int hi){
+        if(lo > hi) return num[0];
+        if(lo == hi) return num[lo];
             
-        if(num[mid] < num[high]) 
-            return binarySearch(num, low, mid-1);
+        int mi = lo + (hi - lo) / 2;
+            
+        if(lo < mi && num[mi] < num[mi-1]) return num[mi];
+        if(mi < hi && num[mi+1] < num[mi]) return num[mi+1];
+        
+        if(num[lo] == num[mi] || num[hi] == num[mi])
+            return min(binarySearch(num, lo, mi-1),binarySearch(num, mi+1, hi));
+            
+        if(num[mi] < num[hi])
+            return binarySearch(num, lo, mi-1);
         else
-            return binarySearch(num, mid+1, high);
-    } 
+            return binarySearch(num, mi+1, hi);
+        
+    }
 };
