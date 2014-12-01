@@ -1,5 +1,6 @@
-// put LRU at the head, remove the first element when the cache is full. move the used element to the end. 
-// hashmap + doubly linked list
+// hashmap + doubly linked list + head/tail
+// Put the Least Recently Used node right after head
+
 struct node{
     int key; // map erase by key
     int val;
